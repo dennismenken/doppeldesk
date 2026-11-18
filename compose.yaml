@@ -1,0 +1,36 @@
+services:
+  doppeldesk:
+    build: .
+    image: ghcr.io/dennismenken/doppeldesk:latest
+    ports:
+      - "8080:8080"
+    environment:
+      # Listen port and interface
+      DOPPELDESK_PORT: "8080"
+      DOPPELDESK_HOST: "0.0.0.0"
+      # Path prefix under which the sevDesk API is exposed
+      DOPPELDESK_BASE_PATH: "/api/v1"
+      # OpenAPI spec source: auto (download with bundled fallback), bundled, or a file path
+      DOPPELDESK_SPEC: "auto"
+      # Comma separated API tokens; each token is its own tenant
+      DOPPELDESK_TOKENS: "doppeldesk"
+      # Token protecting /__doppeldesk (unset means no protection)
+      # DOPPELDESK_CONTROL_TOKEN: ""
+      # State storage: memory or file
+      DOPPELDESK_PERSIST: "memory"
+      DOPPELDESK_DATA_DIR: "/data"
+      # Seeding on startup: none, basic or demo
+      DOPPELDESK_SEED: "basic"
+      DOPPELDESK_LOG_LEVEL: "info"
+    volumes:
+      - doppeldesk-data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/__doppeldesk/health"]
+      interval: 30s
+      timeout: 3s
+      start_period: 10s
+      retries: 3
+    restart: unless-stopped
+
+volumes:
+  doppeldesk-data:

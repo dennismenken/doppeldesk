@@ -1,0 +1,8 @@
+node_modules/
+data/
+*.log
+.DS_Store
+.env
+
+# Private working documents, not part of the repository
+.docs/

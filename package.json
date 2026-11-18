@@ -1,0 +1,52 @@
+{
+  "name": "doppeldesk",
+  "version": "0.1.0",
+  "description": "Stateful fake server for the sevDesk API, generated from the official OpenAPI spec",
+  "license": "MIT",
+  "author": "Dennis Menken",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dennismenken/doppeldesk.git"
+  },
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=26"
+  },
+  "packageManager": "pnpm@12.21.0",
+  "scripts": {
+    "start": "node src/main.ts",
+    "dev": "node --watch src/main.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "check": "pnpm typecheck && pnpm lint",
+    "spec:update": "node scripts/update-spec.ts"
+  },
+  "dependencies": {
+    "fastify": "^5.12.8",
+    "luxon": "^3.7.2",
+    "qs": "^6.17.1",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.6.8",
+    "@types/luxon": "^3.7.6",
+    "@types/node": "^26.6.6",
+    "@types/qs": "^6.15.1",
+    "typescript": "^7.0.2"
+  },
+  "homepage": "https://github.com/dennismenken/doppeldesk#readme",
+  "bugs": {
+    "url": "https://github.com/dennismenken/doppeldesk/issues"
+  },
+  "keywords": [
+    "sevdesk",
+    "openapi",
+    "mock-server",
+    "fake-api",
+    "testing",
+    "accounting",
+    "fastify"
+  ]
+}

@@ -1,0 +1,39 @@
+name: Spec Watch
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Compare upstream spec (report only)
+        run: pnpm --silent spec:update > spec-report.md
+      - name: Open or update issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if grep -qx "Keine Änderungen" spec-report.md; then
+            echo "Upstream spec is identical to the bundled copy."
+            exit 0
+          fi
+          title="sevDesk OpenAPI spec changed upstream"
+          existing=$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue edit "$existing" --body-file spec-report.md
+          else
+            gh issue create --title "$title" --body-file spec-report.md
+          fi

@@ -50,13 +50,6 @@ function assertValidParent(tenant: Tenant, data: PlainObject, selfId: string | u
   if (isPerson(parent)) throw badRequest("The parent of a contact must be an organisation.");
 }
 
-function assertNumberAvailable(tenant: Tenant, customerNumber: string | undefined, selfId?: string): void {
-  if (customerNumber !== undefined && !isCustomerNumberAvailable(tenant, customerNumber, selfId)) {
-    // Assumption: duplicate customer numbers are rejected (unverified).
-    throw badRequest(`The customer number '${customerNumber}' is already in use.`);
-  }
-}
-
 /** Creates a contact with sevDesk semantics (also usable by seeds and other modules). */
 export function createContactDocument(tenant: Tenant, input: PlainObject): Doc {
   const data = normalizeRefs(clientFields(input), CONTACT_REFS);
@@ -64,8 +57,9 @@ export function createContactDocument(tenant: Tenant, input: PlainObject): Doc {
   requireReferencedObjects(tenant, data, { category: "Category" });
   assertHasName(data);
   assertValidParent(tenant, data, undefined);
+  // sevDesk accepts a customer number that is already in use (observed by a consuming
+  // integration: guest orders all carry the same number). Only generated numbers skip used ones.
   const given = textValue(data.customerNumber);
-  assertNumberAvailable(tenant, given);
   return createDocument(tenant, "Contact", data, {
     // Assumption: a new contact without status is a lead (100).
     defaults: { status: 100 },
@@ -83,9 +77,7 @@ function updateContactDocument(tenant: Tenant, id: string, input: PlainObject): 
   assertHasName(merged);
   assertValidParent(tenant, data, id);
   if ("customerNumber" in data) {
-    const number = textValue(data.customerNumber);
-    assertNumberAvailable(tenant, number, id);
-    data.customerNumber = number ?? null;
+    data.customerNumber = textValue(data.customerNumber) ?? null;
   }
   return updateDocument(tenant, "Contact", id, data);
 }

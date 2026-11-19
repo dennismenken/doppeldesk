@@ -10,6 +10,10 @@ gepflegt, und jede Veröffentlichung bekommt einen Eintrag.
 
 ### Behoben
 
+- Stornorechnungen (SR) aus `cancelInvoice` sind ab Erzeugung festgeschrieben (`enshrined`
+  gesetzt), wie bei sevDesk. Vorher war der Wert `null`.
+- Eine bereits vergebene `customerNumber` wird beim Anlegen und Ändern eines Kontakts angenommen,
+  wie bei sevDesk. Vorher folgte 400 „already in use“.
 - `src/seed/data/static-countries.json` fehlte im Repository, weil das Muster `data/` in
   `.gitignore` in jeder Tiefe griff. Start und Reset mit dem Seed `basic` scheiterten deshalb
   auf einem frischen Klon und im Image mit `ENOENT`. Das Muster gilt jetzt nur im

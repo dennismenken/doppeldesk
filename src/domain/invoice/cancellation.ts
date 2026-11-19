@@ -73,7 +73,9 @@ const NEGATED_HEADER_FIELDS = [
 /**
  * POST /Invoice/{id}/cancelInvoice. Creates the cancellation invoice (live-verified):
  * invoiceType "SR", origin {id, objectName: "Invoice"}, positions with negative price,
- * priceGross, sumGross, sumNet (quantity stays positive) and payDate null.
+ * priceGross, sumGross, sumNet (quantity stays positive), payDate null and enshrined set
+ * (sevDesk enshrines the cancellation invoice on creation; observed by a consuming
+ * integration whose header completeness check passed against a real account).
  * The statuses of original and SR and the allowed source statuses are assumptions,
  * see the constants. Returns the cancellation invoice (assumption; the spec only says
  * "an invoice object"). An original created from an order gives the order its status back
@@ -101,7 +103,7 @@ export function cancelInvoice(tenant: Tenant, id: string): Doc {
       status: CANCELLATION_STATUS,
       payDate: null,
       paidAmount: 0,
-      enshrined: null,
+      enshrined: toIso(now),
       sendDate: null,
       sendType: null,
       createUser: original.contactPerson ?? null,

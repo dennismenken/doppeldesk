@@ -1,0 +1,2492 @@
+[
+  {
+    "id": "1",
+    "objectName": "StaticCountry",
+    "code": "de",
+    "name": "Deutschland",
+    "nameEn": "Germany",
+    "translationCode": "COUNTRY_DE",
+    "locale": "de-DE",
+    "priority": "1"
+  },
+  {
+    "id": "2",
+    "objectName": "StaticCountry",
+    "code": "at",
+    "name": "Österreich",
+    "nameEn": "Austria",
+    "translationCode": "COUNTRY_AT",
+    "locale": "de-AT",
+    "priority": "1"
+  },
+  {
+    "id": "3",
+    "objectName": "StaticCountry",
+    "code": "ch",
+    "name": "Schweiz",
+    "nameEn": "Switzerland",
+    "translationCode": "COUNTRY_CH",
+    "locale": "de-CH",
+    "priority": "1"
+  },
+  {
+    "id": "4",
+    "objectName": "StaticCountry",
+    "code": "af",
+    "name": "Afghanistan",
+    "nameEn": "Afghanistan",
+    "translationCode": "COUNTRY_AF",
+    "locale": "de-AF",
+    "priority": "0"
+  },
+  {
+    "id": "5",
+    "objectName": "StaticCountry",
+    "code": "eg",
+    "name": "Ägypten",
+    "nameEn": "Egypt",
+    "translationCode": "COUNTRY_EG",
+    "locale": "de-EG",
+    "priority": "0"
+  },
+  {
+    "id": "6",
+    "objectName": "StaticCountry",
+    "code": "ax",
+    "name": "Ålandinseln",
+    "nameEn": "Åland Islands",
+    "translationCode": "COUNTRY_AX",
+    "locale": "de-AX",
+    "priority": "0"
+  },
+  {
+    "id": "7",
+    "objectName": "StaticCountry",
+    "code": "al",
+    "name": "Albanien",
+    "nameEn": "Albania",
+    "translationCode": "COUNTRY_AL",
+    "locale": "de-AL",
+    "priority": "0"
+  },
+  {
+    "id": "8",
+    "objectName": "StaticCountry",
+    "code": "dz",
+    "name": "Algerien",
+    "nameEn": "Algeria",
+    "translationCode": "COUNTRY_DZ",
+    "locale": "de-DZ",
+    "priority": "0"
+  },
+  {
+    "id": "9",
+    "objectName": "StaticCountry",
+    "code": "as",
+    "name": "Amerikanisch-Samoa",
+    "nameEn": "American Samoa",
+    "translationCode": "COUNTRY_AS",
+    "locale": "de-AS",
+    "priority": "0"
+  },
+  {
+    "id": "10",
+    "objectName": "StaticCountry",
+    "code": "vi",
+    "name": "Amerikanische Jungferninseln",
+    "nameEn": "U.S. Virgin Islands",
+    "translationCode": "COUNTRY_VI",
+    "locale": "de-VI",
+    "priority": "0"
+  },
+  {
+    "id": "11",
+    "objectName": "StaticCountry",
+    "code": "um",
+    "name": "Amerikanische Überseeinseln",
+    "nameEn": "U.S. Outlying Islands",
+    "translationCode": "COUNTRY_UM",
+    "locale": "de-UM",
+    "priority": "0"
+  },
+  {
+    "id": "12",
+    "objectName": "StaticCountry",
+    "code": "ad",
+    "name": "Andorra",
+    "nameEn": "Andorra",
+    "translationCode": "COUNTRY_AD",
+    "locale": "de-AD",
+    "priority": "0"
+  },
+  {
+    "id": "13",
+    "objectName": "StaticCountry",
+    "code": "ao",
+    "name": "Angola",
+    "nameEn": "Angola",
+    "translationCode": "COUNTRY_AO",
+    "locale": "de-AO",
+    "priority": "0"
+  },
+  {
+    "id": "14",
+    "objectName": "StaticCountry",
+    "code": "ai",
+    "name": "Anguilla",
+    "nameEn": "Anguilla",
+    "translationCode": "COUNTRY_AI",
+    "locale": "de-AI",
+    "priority": "0"
+  },
+  {
+    "id": "15",
+    "objectName": "StaticCountry",
+    "code": "aq",
+    "name": "Antarktis",
+    "nameEn": "Antarctica",
+    "translationCode": "COUNTRY_AQ",
+    "locale": "de-AQ",
+    "priority": "0"
+  },
+  {
+    "id": "16",
+    "objectName": "StaticCountry",
+    "code": "ag",
+    "name": "Antigua und Barbuda",
+    "nameEn": "Antigua & Barbuda",
+    "translationCode": "COUNTRY_AG",
+    "locale": "de-AG",
+    "priority": "0"
+  },
+  {
+    "id": "17",
+    "objectName": "StaticCountry",
+    "code": "gq",
+    "name": "Äquatorialguinea",
+    "nameEn": "Equatorial Guinea",
+    "translationCode": "COUNTRY_GQ",
+    "locale": "de-GQ",
+    "priority": "0"
+  },
+  {
+    "id": "18",
+    "objectName": "StaticCountry",
+    "code": "ar",
+    "name": "Argentinien",
+    "nameEn": "Argentina",
+    "translationCode": "COUNTRY_AR",
+    "locale": "de-AR",
+    "priority": "0"
+  },
+  {
+    "id": "19",
+    "objectName": "StaticCountry",
+    "code": "am",
+    "name": "Armenien",
+    "nameEn": "Armenia",
+    "translationCode": "COUNTRY_AM",
+    "locale": "de-AM",
+    "priority": "0"
+  },
+  {
+    "id": "20",
+    "objectName": "StaticCountry",
+    "code": "aw",
+    "name": "Aruba",
+    "nameEn": "Aruba",
+    "translationCode": "COUNTRY_AW",
+    "locale": "de-AW",
+    "priority": "0"
+  },
+  {
+    "id": "21",
+    "objectName": "StaticCountry",
+    "code": "az",
+    "name": "Aserbaidschan",
+    "nameEn": "Azerbaijan",
+    "translationCode": "COUNTRY_AZ",
+    "locale": "de-AZ",
+    "priority": "0"
+  },
+  {
+    "id": "22",
+    "objectName": "StaticCountry",
+    "code": "et",
+    "name": "Äthiopien",
+    "nameEn": "Ethiopia",
+    "translationCode": "COUNTRY_ET",
+    "locale": "de-ET",
+    "priority": "0"
+  },
+  {
+    "id": "23",
+    "objectName": "StaticCountry",
+    "code": "au",
+    "name": "Australien",
+    "nameEn": "Australia",
+    "translationCode": "COUNTRY_AU",
+    "locale": "de-AU",
+    "priority": "0"
+  },
+  {
+    "id": "24",
+    "objectName": "StaticCountry",
+    "code": "bs",
+    "name": "Bahamas",
+    "nameEn": "Bahamas",
+    "translationCode": "COUNTRY_BS",
+    "locale": "de-BS",
+    "priority": "0"
+  },
+  {
+    "id": "25",
+    "objectName": "StaticCountry",
+    "code": "bh",
+    "name": "Bahrain",
+    "nameEn": "Bahrain",
+    "translationCode": "COUNTRY_BH",
+    "locale": "de-BH",
+    "priority": "0"
+  },
+  {
+    "id": "26",
+    "objectName": "StaticCountry",
+    "code": "bd",
+    "name": "Bangladesch",
+    "nameEn": "Bangladesh",
+    "translationCode": "COUNTRY_BD",
+    "locale": "de-BD",
+    "priority": "0"
+  },
+  {
+    "id": "27",
+    "objectName": "StaticCountry",
+    "code": "bb",
+    "name": "Barbados",
+    "nameEn": "Barbados",
+    "translationCode": "COUNTRY_BB",
+    "locale": "de-BB",
+    "priority": "0"
+  },
+  {
+    "id": "28",
+    "objectName": "StaticCountry",
+    "code": "by",
+    "name": "Belarus",
+    "nameEn": "Belarus",
+    "translationCode": "COUNTRY_BY",
+    "locale": "de-BY",
+    "priority": "0"
+  },
+  {
+    "id": "29",
+    "objectName": "StaticCountry",
+    "code": "be",
+    "name": "Belgien",
+    "nameEn": "Belgium",
+    "translationCode": "COUNTRY_BE",
+    "locale": "de-BE",
+    "priority": "0"
+  },
+  {
+    "id": "30",
+    "objectName": "StaticCountry",
+    "code": "bz",
+    "name": "Belize",
+    "nameEn": "Belize",
+    "translationCode": "COUNTRY_BZ",
+    "locale": "de-BZ",
+    "priority": "0"
+  },
+  {
+    "id": "31",
+    "objectName": "StaticCountry",
+    "code": "bj",
+    "name": "Benin",
+    "nameEn": "Benin",
+    "translationCode": "COUNTRY_BJ",
+    "locale": "de-BJ",
+    "priority": "0"
+  },
+  {
+    "id": "32",
+    "objectName": "StaticCountry",
+    "code": "bm",
+    "name": "Bermuda",
+    "nameEn": "Bermuda",
+    "translationCode": "COUNTRY_BM",
+    "locale": "de-BM",
+    "priority": "0"
+  },
+  {
+    "id": "33",
+    "objectName": "StaticCountry",
+    "code": "bt",
+    "name": "Bhutan",
+    "nameEn": "Bhutan",
+    "translationCode": "COUNTRY_BT",
+    "locale": "de-BT",
+    "priority": "0"
+  },
+  {
+    "id": "34",
+    "objectName": "StaticCountry",
+    "code": "bo",
+    "name": "Bolivien",
+    "nameEn": "Bolivia",
+    "translationCode": "COUNTRY_BO",
+    "locale": "de-BO",
+    "priority": "0"
+  },
+  {
+    "id": "35",
+    "objectName": "StaticCountry",
+    "code": "ba",
+    "name": "Bosnien und Herzegowina",
+    "nameEn": "Bosnia & Herzegovina",
+    "translationCode": "COUNTRY_BA",
+    "locale": "de-BA",
+    "priority": "0"
+  },
+  {
+    "id": "36",
+    "objectName": "StaticCountry",
+    "code": "bw",
+    "name": "Botsuana",
+    "nameEn": "Botswana",
+    "translationCode": "COUNTRY_BW",
+    "locale": "de-BW",
+    "priority": "0"
+  },
+  {
+    "id": "37",
+    "objectName": "StaticCountry",
+    "code": "bv",
+    "name": "Bouvetinsel",
+    "nameEn": "Bouvet Island",
+    "translationCode": "COUNTRY_BV",
+    "locale": "de-BV",
+    "priority": "0"
+  },
+  {
+    "id": "38",
+    "objectName": "StaticCountry",
+    "code": "br",
+    "name": "Brasilien",
+    "nameEn": "Brazil",
+    "translationCode": "COUNTRY_BR",
+    "locale": "de-BR",
+    "priority": "0"
+  },
+  {
+    "id": "39",
+    "objectName": "StaticCountry",
+    "code": "vg",
+    "name": "Britische Jungferninseln",
+    "nameEn": "British Virgin Islands",
+    "translationCode": "COUNTRY_VG",
+    "locale": "de-VG",
+    "priority": "0"
+  },
+  {
+    "id": "40",
+    "objectName": "StaticCountry",
+    "code": "io",
+    "name": "Britisches Territorium im Indischen Ozean",
+    "nameEn": "British Indian Ocean Territory",
+    "translationCode": "COUNTRY_IO",
+    "locale": "de-IO",
+    "priority": "0"
+  },
+  {
+    "id": "41",
+    "objectName": "StaticCountry",
+    "code": "bn",
+    "name": "Brunei Darussalam",
+    "nameEn": "Brunei",
+    "translationCode": "COUNTRY_BN",
+    "locale": "de-BN",
+    "priority": "0"
+  },
+  {
+    "id": "42",
+    "objectName": "StaticCountry",
+    "code": "bg",
+    "name": "Bulgarien",
+    "nameEn": "Bulgaria",
+    "translationCode": "COUNTRY_BG",
+    "locale": "de-BG",
+    "priority": "0"
+  },
+  {
+    "id": "43",
+    "objectName": "StaticCountry",
+    "code": "bf",
+    "name": "Burkina Faso",
+    "nameEn": "Burkina Faso",
+    "translationCode": "COUNTRY_BF",
+    "locale": "de-BF",
+    "priority": "0"
+  },
+  {
+    "id": "44",
+    "objectName": "StaticCountry",
+    "code": "bi",
+    "name": "Burundi",
+    "nameEn": "Burundi",
+    "translationCode": "COUNTRY_BI",
+    "locale": "de-BI",
+    "priority": "0"
+  },
+  {
+    "id": "45",
+    "objectName": "StaticCountry",
+    "code": "cv",
+    "name": "Cabo Verde",
+    "nameEn": "Cape Verde",
+    "translationCode": "COUNTRY_CV",
+    "locale": "de-CV",
+    "priority": "0"
+  },
+  {
+    "id": "46",
+    "objectName": "StaticCountry",
+    "code": "cl",
+    "name": "Chile",
+    "nameEn": "Chile",
+    "translationCode": "COUNTRY_CL",
+    "locale": "de-CL",
+    "priority": "0"
+  },
+  {
+    "id": "47",
+    "objectName": "StaticCountry",
+    "code": "cn",
+    "name": "China",
+    "nameEn": "China",
+    "translationCode": "COUNTRY_CN",
+    "locale": "de-CN",
+    "priority": "0"
+  },
+  {
+    "id": "48",
+    "objectName": "StaticCountry",
+    "code": "ck",
+    "name": "Cookinseln",
+    "nameEn": "Cook Islands",
+    "translationCode": "COUNTRY_CK",
+    "locale": "de-CK",
+    "priority": "0"
+  },
+  {
+    "id": "49",
+    "objectName": "StaticCountry",
+    "code": "cr",
+    "name": "Costa Rica",
+    "nameEn": "Costa Rica",
+    "translationCode": "COUNTRY_CR",
+    "locale": "de-CR",
+    "priority": "0"
+  },
+  {
+    "id": "50",
+    "objectName": "StaticCountry",
+    "code": "ci",
+    "name": "Côte d’Ivoire",
+    "nameEn": "Côte d’Ivoire",
+    "translationCode": "COUNTRY_CI",
+    "locale": "de-CI",
+    "priority": "0"
+  },
+  {
+    "id": "51",
+    "objectName": "StaticCountry",
+    "code": "cw",
+    "name": "Curaçao",
+    "nameEn": "Curaçao",
+    "translationCode": "COUNTRY_CW",
+    "locale": "de-CW",
+    "priority": "0"
+  },
+  {
+    "id": "52",
+    "objectName": "StaticCountry",
+    "code": "dk",
+    "name": "Dänemark",
+    "nameEn": "Denmark",
+    "translationCode": "COUNTRY_DK",
+    "locale": "de-DK",
+    "priority": "0"
+  },
+  {
+    "id": "53",
+    "objectName": "StaticCountry",
+    "code": "dm",
+    "name": "Dominica",
+    "nameEn": "Dominica",
+    "translationCode": "COUNTRY_DM",
+    "locale": "de-DM",
+    "priority": "0"
+  },
+  {
+    "id": "54",
+    "objectName": "StaticCountry",
+    "code": "do",
+    "name": "Dominikanische Republik",
+    "nameEn": "Dominican Republic",
+    "translationCode": "COUNTRY_DO",
+    "locale": "de-DO",
+    "priority": "0"
+  },
+  {
+    "id": "55",
+    "objectName": "StaticCountry",
+    "code": "dj",
+    "name": "Dschibuti",
+    "nameEn": "Djibouti",
+    "translationCode": "COUNTRY_DJ",
+    "locale": "de-DJ",
+    "priority": "0"
+  },
+  {
+    "id": "56",
+    "objectName": "StaticCountry",
+    "code": "ec",
+    "name": "Ecuador",
+    "nameEn": "Ecuador",
+    "translationCode": "COUNTRY_EC",
+    "locale": "de-EC",
+    "priority": "0"
+  },
+  {
+    "id": "57",
+    "objectName": "StaticCountry",
+    "code": "sv",
+    "name": "El Salvador",
+    "nameEn": "El Salvador",
+    "translationCode": "COUNTRY_SV",
+    "locale": "de-SV",
+    "priority": "0"
+  },
+  {
+    "id": "58",
+    "objectName": "StaticCountry",
+    "code": "er",
+    "name": "Eritrea",
+    "nameEn": "Eritrea",
+    "translationCode": "COUNTRY_ER",
+    "locale": "de-ER",
+    "priority": "0"
+  },
+  {
+    "id": "59",
+    "objectName": "StaticCountry",
+    "code": "ee",
+    "name": "Estland",
+    "nameEn": "Estonia",
+    "translationCode": "COUNTRY_EE",
+    "locale": "de-EE",
+    "priority": "0"
+  },
+  {
+    "id": "60",
+    "objectName": "StaticCountry",
+    "code": "sz",
+    "name": "Eswatini",
+    "nameEn": "Eswatini",
+    "translationCode": "COUNTRY_SZ",
+    "locale": "de-SZ",
+    "priority": "0"
+  },
+  {
+    "id": "61",
+    "objectName": "StaticCountry",
+    "code": "fk",
+    "name": "Falklandinseln",
+    "nameEn": "Falkland Islands",
+    "translationCode": "COUNTRY_FK",
+    "locale": "de-FK",
+    "priority": "0"
+  },
+  {
+    "id": "62",
+    "objectName": "StaticCountry",
+    "code": "fo",
+    "name": "Färöer",
+    "nameEn": "Faroe Islands",
+    "translationCode": "COUNTRY_FO",
+    "locale": "de-FO",
+    "priority": "0"
+  },
+  {
+    "id": "63",
+    "objectName": "StaticCountry",
+    "code": "fj",
+    "name": "Fidschi",
+    "nameEn": "Fiji",
+    "translationCode": "COUNTRY_FJ",
+    "locale": "de-FJ",
+    "priority": "0"
+  },
+  {
+    "id": "64",
+    "objectName": "StaticCountry",
+    "code": "fi",
+    "name": "Finnland",
+    "nameEn": "Finland",
+    "translationCode": "COUNTRY_FI",
+    "locale": "de-FI",
+    "priority": "0"
+  },
+  {
+    "id": "65",
+    "objectName": "StaticCountry",
+    "code": "fr",
+    "name": "Frankreich",
+    "nameEn": "France",
+    "translationCode": "COUNTRY_FR",
+    "locale": "de-FR",
+    "priority": "0"
+  },
+  {
+    "id": "66",
+    "objectName": "StaticCountry",
+    "code": "gf",
+    "name": "Französisch-Guayana",
+    "nameEn": "French Guiana",
+    "translationCode": "COUNTRY_GF",
+    "locale": "de-GF",
+    "priority": "0"
+  },
+  {
+    "id": "67",
+    "objectName": "StaticCountry",
+    "code": "pf",
+    "name": "Französisch-Polynesien",
+    "nameEn": "French Polynesia",
+    "translationCode": "COUNTRY_PF",
+    "locale": "de-PF",
+    "priority": "0"
+  },
+  {
+    "id": "68",
+    "objectName": "StaticCountry",
+    "code": "tf",
+    "name": "Französische Süd- und Antarktisgebiete",
+    "nameEn": "French Southern Territories",
+    "translationCode": "COUNTRY_TF",
+    "locale": "de-TF",
+    "priority": "0"
+  },
+  {
+    "id": "69",
+    "objectName": "StaticCountry",
+    "code": "ga",
+    "name": "Gabun",
+    "nameEn": "Gabon",
+    "translationCode": "COUNTRY_GA",
+    "locale": "de-GA",
+    "priority": "0"
+  },
+  {
+    "id": "70",
+    "objectName": "StaticCountry",
+    "code": "gm",
+    "name": "Gambia",
+    "nameEn": "Gambia",
+    "translationCode": "COUNTRY_GM",
+    "locale": "de-GM",
+    "priority": "0"
+  },
+  {
+    "id": "71",
+    "objectName": "StaticCountry",
+    "code": "ge",
+    "name": "Georgien",
+    "nameEn": "Georgia",
+    "translationCode": "COUNTRY_GE",
+    "locale": "de-GE",
+    "priority": "0"
+  },
+  {
+    "id": "72",
+    "objectName": "StaticCountry",
+    "code": "gh",
+    "name": "Ghana",
+    "nameEn": "Ghana",
+    "translationCode": "COUNTRY_GH",
+    "locale": "de-GH",
+    "priority": "0"
+  },
+  {
+    "id": "73",
+    "objectName": "StaticCountry",
+    "code": "gi",
+    "name": "Gibraltar",
+    "nameEn": "Gibraltar",
+    "translationCode": "COUNTRY_GI",
+    "locale": "de-GI",
+    "priority": "0"
+  },
+  {
+    "id": "74",
+    "objectName": "StaticCountry",
+    "code": "gd",
+    "name": "Grenada",
+    "nameEn": "Grenada",
+    "translationCode": "COUNTRY_GD",
+    "locale": "de-GD",
+    "priority": "0"
+  },
+  {
+    "id": "75",
+    "objectName": "StaticCountry",
+    "code": "gr",
+    "name": "Griechenland",
+    "nameEn": "Greece",
+    "translationCode": "COUNTRY_GR",
+    "locale": "de-GR",
+    "priority": "0"
+  },
+  {
+    "id": "76",
+    "objectName": "StaticCountry",
+    "code": "gl",
+    "name": "Grönland",
+    "nameEn": "Greenland",
+    "translationCode": "COUNTRY_GL",
+    "locale": "de-GL",
+    "priority": "0"
+  },
+  {
+    "id": "77",
+    "objectName": "StaticCountry",
+    "code": "gp",
+    "name": "Guadeloupe",
+    "nameEn": "Guadeloupe",
+    "translationCode": "COUNTRY_GP",
+    "locale": "de-GP",
+    "priority": "0"
+  },
+  {
+    "id": "78",
+    "objectName": "StaticCountry",
+    "code": "gu",
+    "name": "Guam",
+    "nameEn": "Guam",
+    "translationCode": "COUNTRY_GU",
+    "locale": "de-GU",
+    "priority": "0"
+  },
+  {
+    "id": "79",
+    "objectName": "StaticCountry",
+    "code": "gt",
+    "name": "Guatemala",
+    "nameEn": "Guatemala",
+    "translationCode": "COUNTRY_GT",
+    "locale": "de-GT",
+    "priority": "0"
+  },
+  {
+    "id": "80",
+    "objectName": "StaticCountry",
+    "code": "gg",
+    "name": "Guernsey",
+    "nameEn": "Guernsey",
+    "translationCode": "COUNTRY_GG",
+    "locale": "de-GG",
+    "priority": "0"
+  },
+  {
+    "id": "81",
+    "objectName": "StaticCountry",
+    "code": "gn",
+    "name": "Guinea",
+    "nameEn": "Guinea",
+    "translationCode": "COUNTRY_GN",
+    "locale": "de-GN",
+    "priority": "0"
+  },
+  {
+    "id": "82",
+    "objectName": "StaticCountry",
+    "code": "gw",
+    "name": "Guinea-Bissau",
+    "nameEn": "Guinea-Bissau",
+    "translationCode": "COUNTRY_GW",
+    "locale": "de-GW",
+    "priority": "0"
+  },
+  {
+    "id": "83",
+    "objectName": "StaticCountry",
+    "code": "gy",
+    "name": "Guyana",
+    "nameEn": "Guyana",
+    "translationCode": "COUNTRY_GY",
+    "locale": "de-GY",
+    "priority": "0"
+  },
+  {
+    "id": "84",
+    "objectName": "StaticCountry",
+    "code": "ht",
+    "name": "Haiti",
+    "nameEn": "Haiti",
+    "translationCode": "COUNTRY_HT",
+    "locale": "de-HT",
+    "priority": "0"
+  },
+  {
+    "id": "85",
+    "objectName": "StaticCountry",
+    "code": "hm",
+    "name": "Heard und McDonaldinseln",
+    "nameEn": "Heard & McDonald Islands",
+    "translationCode": "COUNTRY_HM",
+    "locale": "de-HM",
+    "priority": "0"
+  },
+  {
+    "id": "86",
+    "objectName": "StaticCountry",
+    "code": "hn",
+    "name": "Honduras",
+    "nameEn": "Honduras",
+    "translationCode": "COUNTRY_HN",
+    "locale": "de-HN",
+    "priority": "0"
+  },
+  {
+    "id": "87",
+    "objectName": "StaticCountry",
+    "code": "in",
+    "name": "Indien",
+    "nameEn": "India",
+    "translationCode": "COUNTRY_IN",
+    "locale": "de-IN",
+    "priority": "0"
+  },
+  {
+    "id": "88",
+    "objectName": "StaticCountry",
+    "code": "id",
+    "name": "Indonesien",
+    "nameEn": "Indonesia",
+    "translationCode": "COUNTRY_ID",
+    "locale": "de-ID",
+    "priority": "0"
+  },
+  {
+    "id": "89",
+    "objectName": "StaticCountry",
+    "code": "iq",
+    "name": "Irak",
+    "nameEn": "Iraq",
+    "translationCode": "COUNTRY_IQ",
+    "locale": "de-IQ",
+    "priority": "0"
+  },
+  {
+    "id": "90",
+    "objectName": "StaticCountry",
+    "code": "ir",
+    "name": "Iran",
+    "nameEn": "Iran",
+    "translationCode": "COUNTRY_IR",
+    "locale": "de-IR",
+    "priority": "0"
+  },
+  {
+    "id": "91",
+    "objectName": "StaticCountry",
+    "code": "ie",
+    "name": "Irland",
+    "nameEn": "Ireland",
+    "translationCode": "COUNTRY_IE",
+    "locale": "de-IE",
+    "priority": "0"
+  },
+  {
+    "id": "92",
+    "objectName": "StaticCountry",
+    "code": "is",
+    "name": "Island",
+    "nameEn": "Iceland",
+    "translationCode": "COUNTRY_IS",
+    "locale": "de-IS",
+    "priority": "0"
+  },
+  {
+    "id": "93",
+    "objectName": "StaticCountry",
+    "code": "im",
+    "name": "Isle of Man",
+    "nameEn": "Isle of Man",
+    "translationCode": "COUNTRY_IM",
+    "locale": "de-IM",
+    "priority": "0"
+  },
+  {
+    "id": "94",
+    "objectName": "StaticCountry",
+    "code": "il",
+    "name": "Israel",
+    "nameEn": "Israel",
+    "translationCode": "COUNTRY_IL",
+    "locale": "de-IL",
+    "priority": "0"
+  },
+  {
+    "id": "95",
+    "objectName": "StaticCountry",
+    "code": "it",
+    "name": "Italien",
+    "nameEn": "Italy",
+    "translationCode": "COUNTRY_IT",
+    "locale": "de-IT",
+    "priority": "0"
+  },
+  {
+    "id": "96",
+    "objectName": "StaticCountry",
+    "code": "jm",
+    "name": "Jamaika",
+    "nameEn": "Jamaica",
+    "translationCode": "COUNTRY_JM",
+    "locale": "de-JM",
+    "priority": "0"
+  },
+  {
+    "id": "97",
+    "objectName": "StaticCountry",
+    "code": "jp",
+    "name": "Japan",
+    "nameEn": "Japan",
+    "translationCode": "COUNTRY_JP",
+    "locale": "de-JP",
+    "priority": "0"
+  },
+  {
+    "id": "98",
+    "objectName": "StaticCountry",
+    "code": "ye",
+    "name": "Jemen",
+    "nameEn": "Yemen",
+    "translationCode": "COUNTRY_YE",
+    "locale": "de-YE",
+    "priority": "0"
+  },
+  {
+    "id": "99",
+    "objectName": "StaticCountry",
+    "code": "je",
+    "name": "Jersey",
+    "nameEn": "Jersey",
+    "translationCode": "COUNTRY_JE",
+    "locale": "de-JE",
+    "priority": "0"
+  },
+  {
+    "id": "100",
+    "objectName": "StaticCountry",
+    "code": "jo",
+    "name": "Jordanien",
+    "nameEn": "Jordan",
+    "translationCode": "COUNTRY_JO",
+    "locale": "de-JO",
+    "priority": "0"
+  },
+  {
+    "id": "101",
+    "objectName": "StaticCountry",
+    "code": "ky",
+    "name": "Kaimaninseln",
+    "nameEn": "Cayman Islands",
+    "translationCode": "COUNTRY_KY",
+    "locale": "de-KY",
+    "priority": "0"
+  },
+  {
+    "id": "102",
+    "objectName": "StaticCountry",
+    "code": "kh",
+    "name": "Kambodscha",
+    "nameEn": "Cambodia",
+    "translationCode": "COUNTRY_KH",
+    "locale": "de-KH",
+    "priority": "0"
+  },
+  {
+    "id": "103",
+    "objectName": "StaticCountry",
+    "code": "cm",
+    "name": "Kamerun",
+    "nameEn": "Cameroon",
+    "translationCode": "COUNTRY_CM",
+    "locale": "de-CM",
+    "priority": "0"
+  },
+  {
+    "id": "104",
+    "objectName": "StaticCountry",
+    "code": "ca",
+    "name": "Kanada",
+    "nameEn": "Canada",
+    "translationCode": "COUNTRY_CA",
+    "locale": "de-CA",
+    "priority": "0"
+  },
+  {
+    "id": "105",
+    "objectName": "StaticCountry",
+    "code": "bq",
+    "name": "Karibische Niederlande",
+    "nameEn": "Caribbean Netherlands",
+    "translationCode": "COUNTRY_BQ",
+    "locale": "de-BQ",
+    "priority": "0"
+  },
+  {
+    "id": "106",
+    "objectName": "StaticCountry",
+    "code": "kz",
+    "name": "Kasachstan",
+    "nameEn": "Kazakhstan",
+    "translationCode": "COUNTRY_KZ",
+    "locale": "de-KZ",
+    "priority": "0"
+  },
+  {
+    "id": "107",
+    "objectName": "StaticCountry",
+    "code": "qa",
+    "name": "Katar",
+    "nameEn": "Qatar",
+    "translationCode": "COUNTRY_QA",
+    "locale": "de-QA",
+    "priority": "0"
+  },
+  {
+    "id": "108",
+    "objectName": "StaticCountry",
+    "code": "ke",
+    "name": "Kenia",
+    "nameEn": "Kenya",
+    "translationCode": "COUNTRY_KE",
+    "locale": "de-KE",
+    "priority": "0"
+  },
+  {
+    "id": "109",
+    "objectName": "StaticCountry",
+    "code": "kg",
+    "name": "Kirgisistan",
+    "nameEn": "Kyrgyzstan",
+    "translationCode": "COUNTRY_KG",
+    "locale": "de-KG",
+    "priority": "0"
+  },
+  {
+    "id": "110",
+    "objectName": "StaticCountry",
+    "code": "ki",
+    "name": "Kiribati",
+    "nameEn": "Kiribati",
+    "translationCode": "COUNTRY_KI",
+    "locale": "de-KI",
+    "priority": "0"
+  },
+  {
+    "id": "111",
+    "objectName": "StaticCountry",
+    "code": "cc",
+    "name": "Kokosinseln",
+    "nameEn": "Cocos (Keeling) Islands",
+    "translationCode": "COUNTRY_CC",
+    "locale": "de-CC",
+    "priority": "0"
+  },
+  {
+    "id": "112",
+    "objectName": "StaticCountry",
+    "code": "co",
+    "name": "Kolumbien",
+    "nameEn": "Colombia",
+    "translationCode": "COUNTRY_CO",
+    "locale": "de-CO",
+    "priority": "0"
+  },
+  {
+    "id": "113",
+    "objectName": "StaticCountry",
+    "code": "km",
+    "name": "Komoren",
+    "nameEn": "Comoros",
+    "translationCode": "COUNTRY_KM",
+    "locale": "de-KM",
+    "priority": "0"
+  },
+  {
+    "id": "114",
+    "objectName": "StaticCountry",
+    "code": "cg",
+    "name": "Kongo-Brazzaville",
+    "nameEn": "Congo - Brazzaville",
+    "translationCode": "COUNTRY_CG",
+    "locale": "de-CG",
+    "priority": "0"
+  },
+  {
+    "id": "115",
+    "objectName": "StaticCountry",
+    "code": "cd",
+    "name": "Kongo-Kinshasa",
+    "nameEn": "Congo - Kinshasa",
+    "translationCode": "COUNTRY_CD",
+    "locale": "de-CD",
+    "priority": "0"
+  },
+  {
+    "id": "116",
+    "objectName": "StaticCountry",
+    "code": "hr",
+    "name": "Kroatien",
+    "nameEn": "Croatia",
+    "translationCode": "COUNTRY_HR",
+    "locale": "de-HR",
+    "priority": "0"
+  },
+  {
+    "id": "117",
+    "objectName": "StaticCountry",
+    "code": "cu",
+    "name": "Kuba",
+    "nameEn": "Cuba",
+    "translationCode": "COUNTRY_CU",
+    "locale": "de-CU",
+    "priority": "0"
+  },
+  {
+    "id": "118",
+    "objectName": "StaticCountry",
+    "code": "kw",
+    "name": "Kuwait",
+    "nameEn": "Kuwait",
+    "translationCode": "COUNTRY_KW",
+    "locale": "de-KW",
+    "priority": "0"
+  },
+  {
+    "id": "119",
+    "objectName": "StaticCountry",
+    "code": "la",
+    "name": "Laos",
+    "nameEn": "Laos",
+    "translationCode": "COUNTRY_LA",
+    "locale": "de-LA",
+    "priority": "0"
+  },
+  {
+    "id": "120",
+    "objectName": "StaticCountry",
+    "code": "ls",
+    "name": "Lesotho",
+    "nameEn": "Lesotho",
+    "translationCode": "COUNTRY_LS",
+    "locale": "de-LS",
+    "priority": "0"
+  },
+  {
+    "id": "121",
+    "objectName": "StaticCountry",
+    "code": "lv",
+    "name": "Lettland",
+    "nameEn": "Latvia",
+    "translationCode": "COUNTRY_LV",
+    "locale": "de-LV",
+    "priority": "0"
+  },
+  {
+    "id": "122",
+    "objectName": "StaticCountry",
+    "code": "lb",
+    "name": "Libanon",
+    "nameEn": "Lebanon",
+    "translationCode": "COUNTRY_LB",
+    "locale": "de-LB",
+    "priority": "0"
+  },
+  {
+    "id": "123",
+    "objectName": "StaticCountry",
+    "code": "lr",
+    "name": "Liberia",
+    "nameEn": "Liberia",
+    "translationCode": "COUNTRY_LR",
+    "locale": "de-LR",
+    "priority": "0"
+  },
+  {
+    "id": "124",
+    "objectName": "StaticCountry",
+    "code": "ly",
+    "name": "Libyen",
+    "nameEn": "Libya",
+    "translationCode": "COUNTRY_LY",
+    "locale": "de-LY",
+    "priority": "0"
+  },
+  {
+    "id": "125",
+    "objectName": "StaticCountry",
+    "code": "li",
+    "name": "Liechtenstein",
+    "nameEn": "Liechtenstein",
+    "translationCode": "COUNTRY_LI",
+    "locale": "de-LI",
+    "priority": "0"
+  },
+  {
+    "id": "126",
+    "objectName": "StaticCountry",
+    "code": "lt",
+    "name": "Litauen",
+    "nameEn": "Lithuania",
+    "translationCode": "COUNTRY_LT",
+    "locale": "de-LT",
+    "priority": "0"
+  },
+  {
+    "id": "127",
+    "objectName": "StaticCountry",
+    "code": "lu",
+    "name": "Luxemburg",
+    "nameEn": "Luxembourg",
+    "translationCode": "COUNTRY_LU",
+    "locale": "de-LU",
+    "priority": "0"
+  },
+  {
+    "id": "128",
+    "objectName": "StaticCountry",
+    "code": "mg",
+    "name": "Madagaskar",
+    "nameEn": "Madagascar",
+    "translationCode": "COUNTRY_MG",
+    "locale": "de-MG",
+    "priority": "0"
+  },
+  {
+    "id": "129",
+    "objectName": "StaticCountry",
+    "code": "mw",
+    "name": "Malawi",
+    "nameEn": "Malawi",
+    "translationCode": "COUNTRY_MW",
+    "locale": "de-MW",
+    "priority": "0"
+  },
+  {
+    "id": "130",
+    "objectName": "StaticCountry",
+    "code": "my",
+    "name": "Malaysia",
+    "nameEn": "Malaysia",
+    "translationCode": "COUNTRY_MY",
+    "locale": "de-MY",
+    "priority": "0"
+  },
+  {
+    "id": "131",
+    "objectName": "StaticCountry",
+    "code": "mv",
+    "name": "Malediven",
+    "nameEn": "Maldives",
+    "translationCode": "COUNTRY_MV",
+    "locale": "de-MV",
+    "priority": "0"
+  },
+  {
+    "id": "132",
+    "objectName": "StaticCountry",
+    "code": "ml",
+    "name": "Mali",
+    "nameEn": "Mali",
+    "translationCode": "COUNTRY_ML",
+    "locale": "de-ML",
+    "priority": "0"
+  },
+  {
+    "id": "133",
+    "objectName": "StaticCountry",
+    "code": "mt",
+    "name": "Malta",
+    "nameEn": "Malta",
+    "translationCode": "COUNTRY_MT",
+    "locale": "de-MT",
+    "priority": "0"
+  },
+  {
+    "id": "134",
+    "objectName": "StaticCountry",
+    "code": "ma",
+    "name": "Marokko",
+    "nameEn": "Morocco",
+    "translationCode": "COUNTRY_MA",
+    "locale": "de-MA",
+    "priority": "0"
+  },
+  {
+    "id": "135",
+    "objectName": "StaticCountry",
+    "code": "mh",
+    "name": "Marshallinseln",
+    "nameEn": "Marshall Islands",
+    "translationCode": "COUNTRY_MH",
+    "locale": "de-MH",
+    "priority": "0"
+  },
+  {
+    "id": "136",
+    "objectName": "StaticCountry",
+    "code": "mq",
+    "name": "Martinique",
+    "nameEn": "Martinique",
+    "translationCode": "COUNTRY_MQ",
+    "locale": "de-MQ",
+    "priority": "0"
+  },
+  {
+    "id": "137",
+    "objectName": "StaticCountry",
+    "code": "mr",
+    "name": "Mauretanien",
+    "nameEn": "Mauritania",
+    "translationCode": "COUNTRY_MR",
+    "locale": "de-MR",
+    "priority": "0"
+  },
+  {
+    "id": "138",
+    "objectName": "StaticCountry",
+    "code": "mu",
+    "name": "Mauritius",
+    "nameEn": "Mauritius",
+    "translationCode": "COUNTRY_MU",
+    "locale": "de-MU",
+    "priority": "0"
+  },
+  {
+    "id": "139",
+    "objectName": "StaticCountry",
+    "code": "yt",
+    "name": "Mayotte",
+    "nameEn": "Mayotte",
+    "translationCode": "COUNTRY_YT",
+    "locale": "de-YT",
+    "priority": "0"
+  },
+  {
+    "id": "140",
+    "objectName": "StaticCountry",
+    "code": "mx",
+    "name": "Mexiko",
+    "nameEn": "Mexico",
+    "translationCode": "COUNTRY_MX",
+    "locale": "de-MX",
+    "priority": "0"
+  },
+  {
+    "id": "141",
+    "objectName": "StaticCountry",
+    "code": "fm",
+    "name": "Mikronesien",
+    "nameEn": "Micronesia",
+    "translationCode": "COUNTRY_FM",
+    "locale": "de-FM",
+    "priority": "0"
+  },
+  {
+    "id": "142",
+    "objectName": "StaticCountry",
+    "code": "mc",
+    "name": "Monaco",
+    "nameEn": "Monaco",
+    "translationCode": "COUNTRY_MC",
+    "locale": "de-MC",
+    "priority": "0"
+  },
+  {
+    "id": "143",
+    "objectName": "StaticCountry",
+    "code": "mn",
+    "name": "Mongolei",
+    "nameEn": "Mongolia",
+    "translationCode": "COUNTRY_MN",
+    "locale": "de-MN",
+    "priority": "0"
+  },
+  {
+    "id": "144",
+    "objectName": "StaticCountry",
+    "code": "me",
+    "name": "Montenegro",
+    "nameEn": "Montenegro",
+    "translationCode": "COUNTRY_ME",
+    "locale": "de-ME",
+    "priority": "0"
+  },
+  {
+    "id": "145",
+    "objectName": "StaticCountry",
+    "code": "ms",
+    "name": "Montserrat",
+    "nameEn": "Montserrat",
+    "translationCode": "COUNTRY_MS",
+    "locale": "de-MS",
+    "priority": "0"
+  },
+  {
+    "id": "146",
+    "objectName": "StaticCountry",
+    "code": "mz",
+    "name": "Mosambik",
+    "nameEn": "Mozambique",
+    "translationCode": "COUNTRY_MZ",
+    "locale": "de-MZ",
+    "priority": "0"
+  },
+  {
+    "id": "147",
+    "objectName": "StaticCountry",
+    "code": "mm",
+    "name": "Myanmar",
+    "nameEn": "Myanmar (Burma)",
+    "translationCode": "COUNTRY_MM",
+    "locale": "de-MM",
+    "priority": "0"
+  },
+  {
+    "id": "148",
+    "objectName": "StaticCountry",
+    "code": "na",
+    "name": "Namibia",
+    "nameEn": "Namibia",
+    "translationCode": "COUNTRY_NA",
+    "locale": "de-NA",
+    "priority": "0"
+  },
+  {
+    "id": "149",
+    "objectName": "StaticCountry",
+    "code": "nr",
+    "name": "Nauru",
+    "nameEn": "Nauru",
+    "translationCode": "COUNTRY_NR",
+    "locale": "de-NR",
+    "priority": "0"
+  },
+  {
+    "id": "150",
+    "objectName": "StaticCountry",
+    "code": "np",
+    "name": "Nepal",
+    "nameEn": "Nepal",
+    "translationCode": "COUNTRY_NP",
+    "locale": "de-NP",
+    "priority": "0"
+  },
+  {
+    "id": "151",
+    "objectName": "StaticCountry",
+    "code": "nc",
+    "name": "Neukaledonien",
+    "nameEn": "New Caledonia",
+    "translationCode": "COUNTRY_NC",
+    "locale": "de-NC",
+    "priority": "0"
+  },
+  {
+    "id": "152",
+    "objectName": "StaticCountry",
+    "code": "nz",
+    "name": "Neuseeland",
+    "nameEn": "New Zealand",
+    "translationCode": "COUNTRY_NZ",
+    "locale": "de-NZ",
+    "priority": "0"
+  },
+  {
+    "id": "153",
+    "objectName": "StaticCountry",
+    "code": "ni",
+    "name": "Nicaragua",
+    "nameEn": "Nicaragua",
+    "translationCode": "COUNTRY_NI",
+    "locale": "de-NI",
+    "priority": "0"
+  },
+  {
+    "id": "154",
+    "objectName": "StaticCountry",
+    "code": "nl",
+    "name": "Niederlande",
+    "nameEn": "Netherlands",
+    "translationCode": "COUNTRY_NL",
+    "locale": "de-NL",
+    "priority": "0"
+  },
+  {
+    "id": "155",
+    "objectName": "StaticCountry",
+    "code": "ne",
+    "name": "Niger",
+    "nameEn": "Niger",
+    "translationCode": "COUNTRY_NE",
+    "locale": "de-NE",
+    "priority": "0"
+  },
+  {
+    "id": "156",
+    "objectName": "StaticCountry",
+    "code": "ng",
+    "name": "Nigeria",
+    "nameEn": "Nigeria",
+    "translationCode": "COUNTRY_NG",
+    "locale": "de-NG",
+    "priority": "0"
+  },
+  {
+    "id": "157",
+    "objectName": "StaticCountry",
+    "code": "nu",
+    "name": "Niue",
+    "nameEn": "Niue",
+    "translationCode": "COUNTRY_NU",
+    "locale": "de-NU",
+    "priority": "0"
+  },
+  {
+    "id": "158",
+    "objectName": "StaticCountry",
+    "code": "kp",
+    "name": "Nordkorea",
+    "nameEn": "North Korea",
+    "translationCode": "COUNTRY_KP",
+    "locale": "de-KP",
+    "priority": "0"
+  },
+  {
+    "id": "159",
+    "objectName": "StaticCountry",
+    "code": "mp",
+    "name": "Nördliche Marianen",
+    "nameEn": "Northern Mariana Islands",
+    "translationCode": "COUNTRY_MP",
+    "locale": "de-MP",
+    "priority": "0"
+  },
+  {
+    "id": "160",
+    "objectName": "StaticCountry",
+    "code": "mk",
+    "name": "Nordmazedonien",
+    "nameEn": "North Macedonia",
+    "translationCode": "COUNTRY_MK",
+    "locale": "de-MK",
+    "priority": "0"
+  },
+  {
+    "id": "161",
+    "objectName": "StaticCountry",
+    "code": "nf",
+    "name": "Norfolkinsel",
+    "nameEn": "Norfolk Island",
+    "translationCode": "COUNTRY_NF",
+    "locale": "de-NF",
+    "priority": "0"
+  },
+  {
+    "id": "162",
+    "objectName": "StaticCountry",
+    "code": "no",
+    "name": "Norwegen",
+    "nameEn": "Norway",
+    "translationCode": "COUNTRY_NO",
+    "locale": "de-NO",
+    "priority": "0"
+  },
+  {
+    "id": "163",
+    "objectName": "StaticCountry",
+    "code": "om",
+    "name": "Oman",
+    "nameEn": "Oman",
+    "translationCode": "COUNTRY_OM",
+    "locale": "de-OM",
+    "priority": "0"
+  },
+  {
+    "id": "164",
+    "objectName": "StaticCountry",
+    "code": "pk",
+    "name": "Pakistan",
+    "nameEn": "Pakistan",
+    "translationCode": "COUNTRY_PK",
+    "locale": "de-PK",
+    "priority": "0"
+  },
+  {
+    "id": "165",
+    "objectName": "StaticCountry",
+    "code": "ps",
+    "name": "Palästinensische Autonomiegebiete",
+    "nameEn": "Palestinian Territories",
+    "translationCode": "COUNTRY_PS",
+    "locale": "de-PS",
+    "priority": "0"
+  },
+  {
+    "id": "166",
+    "objectName": "StaticCountry",
+    "code": "pw",
+    "name": "Palau",
+    "nameEn": "Palau",
+    "translationCode": "COUNTRY_PW",
+    "locale": "de-PW",
+    "priority": "0"
+  },
+  {
+    "id": "167",
+    "objectName": "StaticCountry",
+    "code": "pa",
+    "name": "Panama",
+    "nameEn": "Panama",
+    "translationCode": "COUNTRY_PA",
+    "locale": "de-PA",
+    "priority": "0"
+  },
+  {
+    "id": "168",
+    "objectName": "StaticCountry",
+    "code": "pg",
+    "name": "Papua-Neuguinea",
+    "nameEn": "Papua New Guinea",
+    "translationCode": "COUNTRY_PG",
+    "locale": "de-PG",
+    "priority": "0"
+  },
+  {
+    "id": "169",
+    "objectName": "StaticCountry",
+    "code": "py",
+    "name": "Paraguay",
+    "nameEn": "Paraguay",
+    "translationCode": "COUNTRY_PY",
+    "locale": "de-PY",
+    "priority": "0"
+  },
+  {
+    "id": "170",
+    "objectName": "StaticCountry",
+    "code": "pe",
+    "name": "Peru",
+    "nameEn": "Peru",
+    "translationCode": "COUNTRY_PE",
+    "locale": "de-PE",
+    "priority": "0"
+  },
+  {
+    "id": "171",
+    "objectName": "StaticCountry",
+    "code": "ph",
+    "name": "Philippinen",
+    "nameEn": "Philippines",
+    "translationCode": "COUNTRY_PH",
+    "locale": "de-PH",
+    "priority": "0"
+  },
+  {
+    "id": "172",
+    "objectName": "StaticCountry",
+    "code": "pn",
+    "name": "Pitcairninseln",
+    "nameEn": "Pitcairn Islands",
+    "translationCode": "COUNTRY_PN",
+    "locale": "de-PN",
+    "priority": "0"
+  },
+  {
+    "id": "173",
+    "objectName": "StaticCountry",
+    "code": "pl",
+    "name": "Polen",
+    "nameEn": "Poland",
+    "translationCode": "COUNTRY_PL",
+    "locale": "de-PL",
+    "priority": "0"
+  },
+  {
+    "id": "174",
+    "objectName": "StaticCountry",
+    "code": "pt",
+    "name": "Portugal",
+    "nameEn": "Portugal",
+    "translationCode": "COUNTRY_PT",
+    "locale": "de-PT",
+    "priority": "0"
+  },
+  {
+    "id": "175",
+    "objectName": "StaticCountry",
+    "code": "pr",
+    "name": "Puerto Rico",
+    "nameEn": "Puerto Rico",
+    "translationCode": "COUNTRY_PR",
+    "locale": "de-PR",
+    "priority": "0"
+  },
+  {
+    "id": "176",
+    "objectName": "StaticCountry",
+    "code": "md",
+    "name": "Republik Moldau",
+    "nameEn": "Moldova",
+    "translationCode": "COUNTRY_MD",
+    "locale": "de-MD",
+    "priority": "0"
+  },
+  {
+    "id": "177",
+    "objectName": "StaticCountry",
+    "code": "re",
+    "name": "Réunion",
+    "nameEn": "Réunion",
+    "translationCode": "COUNTRY_RE",
+    "locale": "de-RE",
+    "priority": "0"
+  },
+  {
+    "id": "178",
+    "objectName": "StaticCountry",
+    "code": "rw",
+    "name": "Ruanda",
+    "nameEn": "Rwanda",
+    "translationCode": "COUNTRY_RW",
+    "locale": "de-RW",
+    "priority": "0"
+  },
+  {
+    "id": "179",
+    "objectName": "StaticCountry",
+    "code": "ro",
+    "name": "Rumänien",
+    "nameEn": "Romania",
+    "translationCode": "COUNTRY_RO",
+    "locale": "de-RO",
+    "priority": "0"
+  },
+  {
+    "id": "180",
+    "objectName": "StaticCountry",
+    "code": "ru",
+    "name": "Russland",
+    "nameEn": "Russia",
+    "translationCode": "COUNTRY_RU",
+    "locale": "de-RU",
+    "priority": "0"
+  },
+  {
+    "id": "181",
+    "objectName": "StaticCountry",
+    "code": "sb",
+    "name": "Salomonen",
+    "nameEn": "Solomon Islands",
+    "translationCode": "COUNTRY_SB",
+    "locale": "de-SB",
+    "priority": "0"
+  },
+  {
+    "id": "182",
+    "objectName": "StaticCountry",
+    "code": "zm",
+    "name": "Sambia",
+    "nameEn": "Zambia",
+    "translationCode": "COUNTRY_ZM",
+    "locale": "de-ZM",
+    "priority": "0"
+  },
+  {
+    "id": "183",
+    "objectName": "StaticCountry",
+    "code": "ws",
+    "name": "Samoa",
+    "nameEn": "Samoa",
+    "translationCode": "COUNTRY_WS",
+    "locale": "de-WS",
+    "priority": "0"
+  },
+  {
+    "id": "184",
+    "objectName": "StaticCountry",
+    "code": "sm",
+    "name": "San Marino",
+    "nameEn": "San Marino",
+    "translationCode": "COUNTRY_SM",
+    "locale": "de-SM",
+    "priority": "0"
+  },
+  {
+    "id": "185",
+    "objectName": "StaticCountry",
+    "code": "st",
+    "name": "São Tomé und Príncipe",
+    "nameEn": "São Tomé & Príncipe",
+    "translationCode": "COUNTRY_ST",
+    "locale": "de-ST",
+    "priority": "0"
+  },
+  {
+    "id": "186",
+    "objectName": "StaticCountry",
+    "code": "sa",
+    "name": "Saudi-Arabien",
+    "nameEn": "Saudi Arabia",
+    "translationCode": "COUNTRY_SA",
+    "locale": "de-SA",
+    "priority": "0"
+  },
+  {
+    "id": "187",
+    "objectName": "StaticCountry",
+    "code": "se",
+    "name": "Schweden",
+    "nameEn": "Sweden",
+    "translationCode": "COUNTRY_SE",
+    "locale": "de-SE",
+    "priority": "0"
+  },
+  {
+    "id": "188",
+    "objectName": "StaticCountry",
+    "code": "sn",
+    "name": "Senegal",
+    "nameEn": "Senegal",
+    "translationCode": "COUNTRY_SN",
+    "locale": "de-SN",
+    "priority": "0"
+  },
+  {
+    "id": "189",
+    "objectName": "StaticCountry",
+    "code": "rs",
+    "name": "Serbien",
+    "nameEn": "Serbia",
+    "translationCode": "COUNTRY_RS",
+    "locale": "de-RS",
+    "priority": "0"
+  },
+  {
+    "id": "190",
+    "objectName": "StaticCountry",
+    "code": "sc",
+    "name": "Seychellen",
+    "nameEn": "Seychelles",
+    "translationCode": "COUNTRY_SC",
+    "locale": "de-SC",
+    "priority": "0"
+  },
+  {
+    "id": "191",
+    "objectName": "StaticCountry",
+    "code": "sl",
+    "name": "Sierra Leone",
+    "nameEn": "Sierra Leone",
+    "translationCode": "COUNTRY_SL",
+    "locale": "de-SL",
+    "priority": "0"
+  },
+  {
+    "id": "192",
+    "objectName": "StaticCountry",
+    "code": "zw",
+    "name": "Simbabwe",
+    "nameEn": "Zimbabwe",
+    "translationCode": "COUNTRY_ZW",
+    "locale": "de-ZW",
+    "priority": "0"
+  },
+  {
+    "id": "193",
+    "objectName": "StaticCountry",
+    "code": "sg",
+    "name": "Singapur",
+    "nameEn": "Singapore",
+    "translationCode": "COUNTRY_SG",
+    "locale": "de-SG",
+    "priority": "0"
+  },
+  {
+    "id": "194",
+    "objectName": "StaticCountry",
+    "code": "sx",
+    "name": "Sint Maarten",
+    "nameEn": "Sint Maarten",
+    "translationCode": "COUNTRY_SX",
+    "locale": "de-SX",
+    "priority": "0"
+  },
+  {
+    "id": "195",
+    "objectName": "StaticCountry",
+    "code": "sk",
+    "name": "Slowakei",
+    "nameEn": "Slovakia",
+    "translationCode": "COUNTRY_SK",
+    "locale": "de-SK",
+    "priority": "0"
+  },
+  {
+    "id": "196",
+    "objectName": "StaticCountry",
+    "code": "si",
+    "name": "Slowenien",
+    "nameEn": "Slovenia",
+    "translationCode": "COUNTRY_SI",
+    "locale": "de-SI",
+    "priority": "0"
+  },
+  {
+    "id": "197",
+    "objectName": "StaticCountry",
+    "code": "so",
+    "name": "Somalia",
+    "nameEn": "Somalia",
+    "translationCode": "COUNTRY_SO",
+    "locale": "de-SO",
+    "priority": "0"
+  },
+  {
+    "id": "198",
+    "objectName": "StaticCountry",
+    "code": "hk",
+    "name": "Sonderverwaltungsregion Hongkong",
+    "nameEn": "Hong Kong SAR China",
+    "translationCode": "COUNTRY_HK",
+    "locale": "de-HK",
+    "priority": "0"
+  },
+  {
+    "id": "199",
+    "objectName": "StaticCountry",
+    "code": "mo",
+    "name": "Sonderverwaltungsregion Macau",
+    "nameEn": "Macao SAR China",
+    "translationCode": "COUNTRY_MO",
+    "locale": "de-MO",
+    "priority": "0"
+  },
+  {
+    "id": "200",
+    "objectName": "StaticCountry",
+    "code": "es",
+    "name": "Spanien",
+    "nameEn": "Spain",
+    "translationCode": "COUNTRY_ES",
+    "locale": "de-ES",
+    "priority": "0"
+  },
+  {
+    "id": "201",
+    "objectName": "StaticCountry",
+    "code": "sj",
+    "name": "Spitzbergen und Jan Mayen",
+    "nameEn": "Svalbard & Jan Mayen",
+    "translationCode": "COUNTRY_SJ",
+    "locale": "de-SJ",
+    "priority": "0"
+  },
+  {
+    "id": "202",
+    "objectName": "StaticCountry",
+    "code": "lk",
+    "name": "Sri Lanka",
+    "nameEn": "Sri Lanka",
+    "translationCode": "COUNTRY_LK",
+    "locale": "de-LK",
+    "priority": "0"
+  },
+  {
+    "id": "203",
+    "objectName": "StaticCountry",
+    "code": "bl",
+    "name": "St. Barthélemy",
+    "nameEn": "St. Barthélemy",
+    "translationCode": "COUNTRY_BL",
+    "locale": "de-BL",
+    "priority": "0"
+  },
+  {
+    "id": "204",
+    "objectName": "StaticCountry",
+    "code": "sh",
+    "name": "St. Helena",
+    "nameEn": "St. Helena",
+    "translationCode": "COUNTRY_SH",
+    "locale": "de-SH",
+    "priority": "0"
+  },
+  {
+    "id": "205",
+    "objectName": "StaticCountry",
+    "code": "kn",
+    "name": "St. Kitts und Nevis",
+    "nameEn": "St. Kitts & Nevis",
+    "translationCode": "COUNTRY_KN",
+    "locale": "de-KN",
+    "priority": "0"
+  },
+  {
+    "id": "206",
+    "objectName": "StaticCountry",
+    "code": "lc",
+    "name": "St. Lucia",
+    "nameEn": "St. Lucia",
+    "translationCode": "COUNTRY_LC",
+    "locale": "de-LC",
+    "priority": "0"
+  },
+  {
+    "id": "207",
+    "objectName": "StaticCountry",
+    "code": "mf",
+    "name": "St. Martin",
+    "nameEn": "St. Martin",
+    "translationCode": "COUNTRY_MF",
+    "locale": "de-MF",
+    "priority": "0"
+  },
+  {
+    "id": "208",
+    "objectName": "StaticCountry",
+    "code": "pm",
+    "name": "St. Pierre und Miquelon",
+    "nameEn": "St. Pierre & Miquelon",
+    "translationCode": "COUNTRY_PM",
+    "locale": "de-PM",
+    "priority": "0"
+  },
+  {
+    "id": "209",
+    "objectName": "StaticCountry",
+    "code": "vc",
+    "name": "St. Vincent und die Grenadinen",
+    "nameEn": "St. Vincent & Grenadines",
+    "translationCode": "COUNTRY_VC",
+    "locale": "de-VC",
+    "priority": "0"
+  },
+  {
+    "id": "210",
+    "objectName": "StaticCountry",
+    "code": "za",
+    "name": "Südafrika",
+    "nameEn": "South Africa",
+    "translationCode": "COUNTRY_ZA",
+    "locale": "de-ZA",
+    "priority": "0"
+  },
+  {
+    "id": "211",
+    "objectName": "StaticCountry",
+    "code": "sd",
+    "name": "Sudan",
+    "nameEn": "Sudan",
+    "translationCode": "COUNTRY_SD",
+    "locale": "de-SD",
+    "priority": "0"
+  },
+  {
+    "id": "212",
+    "objectName": "StaticCountry",
+    "code": "gs",
+    "name": "Südgeorgien und die Südlichen Sandwichinseln",
+    "nameEn": "South Georgia & South Sandwich Islands",
+    "translationCode": "COUNTRY_GS",
+    "locale": "de-GS",
+    "priority": "0"
+  },
+  {
+    "id": "213",
+    "objectName": "StaticCountry",
+    "code": "kr",
+    "name": "Südkorea",
+    "nameEn": "South Korea",
+    "translationCode": "COUNTRY_KR",
+    "locale": "de-KR",
+    "priority": "0"
+  },
+  {
+    "id": "214",
+    "objectName": "StaticCountry",
+    "code": "ss",
+    "name": "Südsudan",
+    "nameEn": "South Sudan",
+    "translationCode": "COUNTRY_SS",
+    "locale": "de-SS",
+    "priority": "0"
+  },
+  {
+    "id": "215",
+    "objectName": "StaticCountry",
+    "code": "sr",
+    "name": "Suriname",
+    "nameEn": "Suriname",
+    "translationCode": "COUNTRY_SR",
+    "locale": "de-SR",
+    "priority": "0"
+  },
+  {
+    "id": "216",
+    "objectName": "StaticCountry",
+    "code": "sy",
+    "name": "Syrien",
+    "nameEn": "Syria",
+    "translationCode": "COUNTRY_SY",
+    "locale": "de-SY",
+    "priority": "0"
+  },
+  {
+    "id": "217",
+    "objectName": "StaticCountry",
+    "code": "tj",
+    "name": "Tadschikistan",
+    "nameEn": "Tajikistan",
+    "translationCode": "COUNTRY_TJ",
+    "locale": "de-TJ",
+    "priority": "0"
+  },
+  {
+    "id": "218",
+    "objectName": "StaticCountry",
+    "code": "tw",
+    "name": "Taiwan",
+    "nameEn": "Taiwan",
+    "translationCode": "COUNTRY_TW",
+    "locale": "de-TW",
+    "priority": "0"
+  },
+  {
+    "id": "219",
+    "objectName": "StaticCountry",
+    "code": "tz",
+    "name": "Tansania",
+    "nameEn": "Tanzania",
+    "translationCode": "COUNTRY_TZ",
+    "locale": "de-TZ",
+    "priority": "0"
+  },
+  {
+    "id": "220",
+    "objectName": "StaticCountry",
+    "code": "th",
+    "name": "Thailand",
+    "nameEn": "Thailand",
+    "translationCode": "COUNTRY_TH",
+    "locale": "de-TH",
+    "priority": "0"
+  },
+  {
+    "id": "221",
+    "objectName": "StaticCountry",
+    "code": "tl",
+    "name": "Timor-Leste",
+    "nameEn": "Timor-Leste",
+    "translationCode": "COUNTRY_TL",
+    "locale": "de-TL",
+    "priority": "0"
+  },
+  {
+    "id": "222",
+    "objectName": "StaticCountry",
+    "code": "tg",
+    "name": "Togo",
+    "nameEn": "Togo",
+    "translationCode": "COUNTRY_TG",
+    "locale": "de-TG",
+    "priority": "0"
+  },
+  {
+    "id": "223",
+    "objectName": "StaticCountry",
+    "code": "tk",
+    "name": "Tokelau",
+    "nameEn": "Tokelau",
+    "translationCode": "COUNTRY_TK",
+    "locale": "de-TK",
+    "priority": "0"
+  },
+  {
+    "id": "224",
+    "objectName": "StaticCountry",
+    "code": "to",
+    "name": "Tonga",
+    "nameEn": "Tonga",
+    "translationCode": "COUNTRY_TO",
+    "locale": "de-TO",
+    "priority": "0"
+  },
+  {
+    "id": "225",
+    "objectName": "StaticCountry",
+    "code": "tt",
+    "name": "Trinidad und Tobago",
+    "nameEn": "Trinidad & Tobago",
+    "translationCode": "COUNTRY_TT",
+    "locale": "de-TT",
+    "priority": "0"
+  },
+  {
+    "id": "226",
+    "objectName": "StaticCountry",
+    "code": "td",
+    "name": "Tschad",
+    "nameEn": "Chad",
+    "translationCode": "COUNTRY_TD",
+    "locale": "de-TD",
+    "priority": "0"
+  },
+  {
+    "id": "227",
+    "objectName": "StaticCountry",
+    "code": "cz",
+    "name": "Tschechien",
+    "nameEn": "Czechia",
+    "translationCode": "COUNTRY_CZ",
+    "locale": "de-CZ",
+    "priority": "0"
+  },
+  {
+    "id": "228",
+    "objectName": "StaticCountry",
+    "code": "tn",
+    "name": "Tunesien",
+    "nameEn": "Tunisia",
+    "translationCode": "COUNTRY_TN",
+    "locale": "de-TN",
+    "priority": "0"
+  },
+  {
+    "id": "229",
+    "objectName": "StaticCountry",
+    "code": "tr",
+    "name": "Türkei",
+    "nameEn": "Türkiye",
+    "translationCode": "COUNTRY_TR",
+    "locale": "de-TR",
+    "priority": "0"
+  },
+  {
+    "id": "230",
+    "objectName": "StaticCountry",
+    "code": "tm",
+    "name": "Turkmenistan",
+    "nameEn": "Turkmenistan",
+    "translationCode": "COUNTRY_TM",
+    "locale": "de-TM",
+    "priority": "0"
+  },
+  {
+    "id": "231",
+    "objectName": "StaticCountry",
+    "code": "tc",
+    "name": "Turks- und Caicosinseln",
+    "nameEn": "Turks & Caicos Islands",
+    "translationCode": "COUNTRY_TC",
+    "locale": "de-TC",
+    "priority": "0"
+  },
+  {
+    "id": "232",
+    "objectName": "StaticCountry",
+    "code": "tv",
+    "name": "Tuvalu",
+    "nameEn": "Tuvalu",
+    "translationCode": "COUNTRY_TV",
+    "locale": "de-TV",
+    "priority": "0"
+  },
+  {
+    "id": "233",
+    "objectName": "StaticCountry",
+    "code": "ug",
+    "name": "Uganda",
+    "nameEn": "Uganda",
+    "translationCode": "COUNTRY_UG",
+    "locale": "de-UG",
+    "priority": "0"
+  },
+  {
+    "id": "234",
+    "objectName": "StaticCountry",
+    "code": "ua",
+    "name": "Ukraine",
+    "nameEn": "Ukraine",
+    "translationCode": "COUNTRY_UA",
+    "locale": "de-UA",
+    "priority": "0"
+  },
+  {
+    "id": "235",
+    "objectName": "StaticCountry",
+    "code": "hu",
+    "name": "Ungarn",
+    "nameEn": "Hungary",
+    "translationCode": "COUNTRY_HU",
+    "locale": "de-HU",
+    "priority": "0"
+  },
+  {
+    "id": "236",
+    "objectName": "StaticCountry",
+    "code": "uy",
+    "name": "Uruguay",
+    "nameEn": "Uruguay",
+    "translationCode": "COUNTRY_UY",
+    "locale": "de-UY",
+    "priority": "0"
+  },
+  {
+    "id": "237",
+    "objectName": "StaticCountry",
+    "code": "uz",
+    "name": "Usbekistan",
+    "nameEn": "Uzbekistan",
+    "translationCode": "COUNTRY_UZ",
+    "locale": "de-UZ",
+    "priority": "0"
+  },
+  {
+    "id": "238",
+    "objectName": "StaticCountry",
+    "code": "vu",
+    "name": "Vanuatu",
+    "nameEn": "Vanuatu",
+    "translationCode": "COUNTRY_VU",
+    "locale": "de-VU",
+    "priority": "0"
+  },
+  {
+    "id": "239",
+    "objectName": "StaticCountry",
+    "code": "va",
+    "name": "Vatikanstadt",
+    "nameEn": "Vatican City",
+    "translationCode": "COUNTRY_VA",
+    "locale": "de-VA",
+    "priority": "0"
+  },
+  {
+    "id": "240",
+    "objectName": "StaticCountry",
+    "code": "ve",
+    "name": "Venezuela",
+    "nameEn": "Venezuela",
+    "translationCode": "COUNTRY_VE",
+    "locale": "de-VE",
+    "priority": "0"
+  },
+  {
+    "id": "241",
+    "objectName": "StaticCountry",
+    "code": "ae",
+    "name": "Vereinigte Arabische Emirate",
+    "nameEn": "United Arab Emirates",
+    "translationCode": "COUNTRY_AE",
+    "locale": "de-AE",
+    "priority": "0"
+  },
+  {
+    "id": "242",
+    "objectName": "StaticCountry",
+    "code": "us",
+    "name": "Vereinigte Staaten",
+    "nameEn": "United States",
+    "translationCode": "COUNTRY_US",
+    "locale": "de-US",
+    "priority": "0"
+  },
+  {
+    "id": "243",
+    "objectName": "StaticCountry",
+    "code": "gb",
+    "name": "Vereinigtes Königreich",
+    "nameEn": "United Kingdom",
+    "translationCode": "COUNTRY_GB",
+    "locale": "de-GB",
+    "priority": "0"
+  },
+  {
+    "id": "244",
+    "objectName": "StaticCountry",
+    "code": "vn",
+    "name": "Vietnam",
+    "nameEn": "Vietnam",
+    "translationCode": "COUNTRY_VN",
+    "locale": "de-VN",
+    "priority": "0"
+  },
+  {
+    "id": "245",
+    "objectName": "StaticCountry",
+    "code": "wf",
+    "name": "Wallis und Futuna",
+    "nameEn": "Wallis & Futuna",
+    "translationCode": "COUNTRY_WF",
+    "locale": "de-WF",
+    "priority": "0"
+  },
+  {
+    "id": "246",
+    "objectName": "StaticCountry",
+    "code": "cx",
+    "name": "Weihnachtsinsel",
+    "nameEn": "Christmas Island",
+    "translationCode": "COUNTRY_CX",
+    "locale": "de-CX",
+    "priority": "0"
+  },
+  {
+    "id": "247",
+    "objectName": "StaticCountry",
+    "code": "eh",
+    "name": "Westsahara",
+    "nameEn": "Western Sahara",
+    "translationCode": "COUNTRY_EH",
+    "locale": "de-EH",
+    "priority": "0"
+  },
+  {
+    "id": "248",
+    "objectName": "StaticCountry",
+    "code": "cf",
+    "name": "Zentralafrikanische Republik",
+    "nameEn": "Central African Republic",
+    "translationCode": "COUNTRY_CF",
+    "locale": "de-CF",
+    "priority": "0"
+  },
+  {
+    "id": "249",
+    "objectName": "StaticCountry",
+    "code": "cy",
+    "name": "Zypern",
+    "nameEn": "Cyprus",
+    "translationCode": "COUNTRY_CY",
+    "locale": "de-CY",
+    "priority": "0"
+  }
+]

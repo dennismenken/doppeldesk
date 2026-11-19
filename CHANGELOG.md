@@ -8,6 +8,19 @@ gepflegt, und jede Veröffentlichung bekommt einen Eintrag.
 
 ## [Unveröffentlicht]
 
+### Behoben
+
+- `src/seed/data/static-countries.json` fehlte im Repository, weil das Muster `data/` in
+  `.gitignore` in jeder Tiefe griff. Start und Reset mit dem Seed `basic` scheiterten deshalb
+  auf einem frischen Klon und im Image mit `ENOENT`. Das Muster gilt jetzt nur im
+  Wurzelverzeichnis (`/data/`).
+
+### Hinzugefügt
+
+- `pnpm smoke` startet den Server mit jedem Seed und prüft Länderliste, Anlegen, Token-Abweisung
+  und Reset. Die CI führt den Test aus und prüft zusätzlich das gebaute Image (Healthcheck und
+  API).
+
 ### Geändert
 
 - Der Query-Parameter `token` authentifiziert nicht mehr, wie bei sevDesk seit dem 29.04.2025.

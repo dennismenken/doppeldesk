@@ -359,6 +359,7 @@ Voraussetzungen: Node.js 26, pnpm 12 (festgelegt über `packageManager`).
 pnpm install
 pnpm dev          # Start mit Neuladen bei Änderungen
 pnpm check        # tsc (Typprüfung) und Biome (Lint und Format)
+pnpm smoke        # startet den Server mit jedem Seed und prüft Grundfunktionen
 pnpm lint:fix     # Biome-Korrekturen und Formatierung anwenden
 ```
 

@@ -18,6 +18,7 @@ Wer eine Sicherheitslücke gefunden hat, liest zuerst [SECURITY.md](SECURITY.md)
 pnpm install
 pnpm dev          # Start mit Neuladen
 pnpm check        # tsc und Biome, muss grün sein
+pnpm smoke        # Starttest mit den Seeds none, basic und demo, muss grün sein
 pnpm lint:fix     # Biome-Korrekturen und Formatierung
 ```
 

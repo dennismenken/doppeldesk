@@ -19,6 +19,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm check
+      - run: pnpm smoke
 
   docker:
     runs-on: ubuntu-latest
@@ -30,5 +31,20 @@ jobs:
         with:
           context: .
           push: false
+          load: true
+          tags: doppeldesk:ci
           cache-from: type=gha
           cache-to: type=gha,mode=max
+      - name: Smoke test the image
+        run: |
+          docker run -d --name doppeldesk-ci -p 8080:8080 -e DOPPELDESK_SPEC=bundled doppeldesk:ci
+          for i in $(seq 1 30); do
+            [ "$(docker inspect -f '{{.State.Health.Status}}' doppeldesk-ci)" = healthy ] && break
+            sleep 2
+          done
+          docker inspect -f '{{.State.Health.Status}}' doppeldesk-ci | grep -qx healthy || { docker logs doppeldesk-ci; exit 1; }
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - name: Smoke test the API in the image
+        run: SMOKE_BASE_URL=http://127.0.0.1:8080 node scripts/smoke.ts

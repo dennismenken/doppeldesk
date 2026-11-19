@@ -21,7 +21,8 @@
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "check": "pnpm typecheck && pnpm lint",
-    "spec:update": "node scripts/update-spec.ts"
+    "spec:update": "node scripts/update-spec.ts",
+    "smoke": "node scripts/smoke.ts"
   },
   "dependencies": {
     "fastify": "^5.12.8",

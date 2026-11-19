@@ -4,7 +4,7 @@ import { contactRoutes } from "./contacts.ts";
 import { customFieldRoutes } from "./customFields.ts";
 import { tagRoutes } from "./tags.ts";
 
-export { COMMUNICATION_WAY_KEYS, seedCommunicationWayKeys } from "./communicationWayKeys.ts";
+export { COMMUNICATION_WAY_KEYS } from "./communicationWayKeys.ts";
 export { createContactDocument, deleteContactCascade } from "./contacts.ts";
 export { issueCustomerNumber, peekFreeCustomerNumber } from "./customerNumber.ts";
 

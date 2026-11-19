@@ -4,8 +4,13 @@ import { matchesPathPattern } from "./pathPattern.ts";
 /** One logged API request. Never contains the API token or any header. */
 export interface RequestLogEntry {
   id: number;
-  /** Wall-clock time of the request (ISO 8601). */
+  /** Wall-clock time of the request (ISO 8601, UTC). */
   time: string;
+  /**
+   * Time of the tenant clock when the request arrived (ISO 8601, Europe/Berlin like the
+   * dates of documents); differs from "time" when the clock is frozen or moved.
+   */
+  clockTime: string;
   method: string;
   /** Path relative to the API base path, without query string. */
   path: string;

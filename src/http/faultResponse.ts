@@ -2,7 +2,7 @@ import { STATUS_CODES } from "node:http";
 import { setTimeout as delay } from "node:timers/promises";
 import type { FastifyReply } from "fastify";
 import { errorBody } from "../lib/errors.ts";
-import type { Fault } from "../tenant/faults.ts";
+import { DEFAULT_FAULT_STATUS, type Fault } from "../tenant/faults.ts";
 import type { Tenant } from "../tenant/tenant.ts";
 
 /** Body of an "invalid-json" fault: truncated JSON with a JSON content type. */
@@ -20,13 +20,13 @@ export async function sendFault(
 ): Promise<boolean> {
   switch (fault.type) {
     case "status": {
-      const status = fault.status ?? 500;
+      const status = fault.status ?? DEFAULT_FAULT_STATUS;
       await reply.code(status).send(errorBody(fault.message ?? defaultMessage(status)));
       return true;
     }
     case "feature-lock": {
       const message = `Feature with the code '${fault.code}' is not available for the user id ${fault.userId ?? defaultUserId(tenant)}`;
-      await reply.code(fault.status ?? 500).send(errorBody(message));
+      await reply.code(fault.status ?? DEFAULT_FAULT_STATUS).send(errorBody(message));
       return true;
     }
     case "invalid-json":

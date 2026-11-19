@@ -2,7 +2,7 @@ import { listModel } from "../../routes/generic.ts";
 import type { DomainModule, RouteDefinition } from "../../routes/types.ts";
 import { documentPositionOrder } from "../shared/positions.ts";
 import { changeOrderParameter, getOrderPdf, sendOrderBy, sendOrderViaEmail } from "./actions.ts";
-import { ORDER_POS, ORDER_POSITIONS } from "./constants.ts";
+import { HEAD_EXTRA_FIELDS, ORDER_POS, ORDER_POSITIONS } from "./constants.ts";
 import {
   deleteOrder,
   deleteOrderPosition,
@@ -26,6 +26,10 @@ const routes: RouteDefinition[] = [
   {
     method: "POST",
     path: "/Order/Factory/saveOrder",
+    factoryParts: [
+      { field: "order", responseField: "order", extraFields: HEAD_EXTRA_FIELDS },
+      { field: "orderPosSave", responseField: "orderPos" },
+    ],
     handler: (context) => {
       const { order, positions } = saveOrder(context.tenant, context.spec, context.input);
       return { objects: { order, orderPos: positions } };

@@ -1,5 +1,6 @@
 import type { Doc } from "../../store/collection.ts";
 import type { Tenant } from "../../tenant/tenant.ts";
+import { isRefTo } from "../shared/refs.ts";
 import { isBlank, validationError } from "../shared/validation.ts";
 import { INVOICE } from "./constants.ts";
 
@@ -33,4 +34,11 @@ export function assertNotRecurring(invoice: Doc): void {
   if (typeOf(invoice) === "WKR") {
     throw validationError("This endpoint can not be used for recurring invoices (invoiceType WKR)");
   }
+}
+
+/** The cancellation invoice (SR) of an invoice, if one exists. */
+export function cancellationOf(tenant: Tenant, invoiceId: string): Doc | undefined {
+  return tenant.store
+    .collection(INVOICE)
+    .findOne((doc) => typeOf(doc) === "SR" && isRefTo(doc.origin, INVOICE, invoiceId));
 }

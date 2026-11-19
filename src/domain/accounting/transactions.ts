@@ -17,6 +17,7 @@ import { createDocument, patchDocument, updateDocument } from "../shared/documen
 import { anyDateFilter, containsFilter } from "../shared/filters.ts";
 import { isTrue } from "../shared/list.ts";
 import { roundMoney, toNumber } from "../shared/money.ts";
+import { BOOKING_LINK_FIELD } from "../shared/payments.ts";
 import { referencesTo, referencingModels } from "../shared/references.ts";
 import { refId } from "../shared/refs.ts";
 import { blankFields, invalidParameter, missingParameters, validationError } from "../shared/validation.ts";
@@ -32,9 +33,6 @@ const REQUIRED_FIELDS = ["valueDate", "checkAccount", "amount", "status", "payee
 
 /** Fields a booking depends on; they stay fixed while a document is booked on the transaction. */
 const BOOKED_FIELDS = ["amount", "checkAccount", "valueDate", "status"] as const;
-
-/** Field of the booking logs (InvoiceLog, CreditNoteLog, VoucherLog) that links the transaction. */
-const BOOKING_LINK_FIELD = "checkAccountTransaction";
 
 /** Sum of the transactions of an account with a value date up to the end of the given day (Berlin). */
 export function balanceAt(tenant: Tenant, accountId: string, day: DateTime): number {
@@ -58,7 +56,8 @@ function normalizeFields(tenant: Tenant, input: PlainObject): PlainObject {
   if ("amount" in input) {
     const amount = toNumber(input.amount, Number.NaN);
     if (!Number.isFinite(amount)) throw invalidParameter("amount");
-    result.amount = amount;
+    // Money amounts have two decimals, half up like all other amounts.
+    result.amount = roundMoney(amount);
   }
   if ("status" in input) {
     const status = Number(input.status);

@@ -88,6 +88,27 @@ export function effectiveSchema(
   return resolved;
 }
 
+const PROPERTY_NAME_DEPTH = 8;
+
+/**
+ * Names of all properties a schema can declare: $ref, allOf, every oneOf/anyOf variant and
+ * array items are followed. Empty when the schema is missing or declares no properties.
+ */
+export function schemaPropertyNames(spec: SpecIndex, schema: Schema | undefined): Set<string> {
+  const names = new Set<string>();
+  const visit = (current: Schema | undefined, depth: number): void => {
+    const resolved = spec.resolve(current);
+    if (resolved === undefined || depth > PROPERTY_NAME_DEPTH) return;
+    for (const name of Object.keys(resolved.properties ?? {})) names.add(name);
+    for (const part of [...(resolved.allOf ?? []), ...(resolved.oneOf ?? []), ...(resolved.anyOf ?? [])]) {
+      visit(part, depth + 1);
+    }
+    if (resolved.items !== undefined) visit(resolved.items, depth + 1);
+  };
+  visit(schema, 0);
+  return names;
+}
+
 function mergeAllOf(spec: SpecIndex, schema: Schema): Schema {
   const properties: Record<string, Schema> = {};
   for (const part of schema.allOf ?? []) {

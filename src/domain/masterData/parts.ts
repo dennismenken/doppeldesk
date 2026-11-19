@@ -17,12 +17,15 @@ import {
   requireReferencedObjects,
 } from "../shared/references.ts";
 import { toRef } from "../shared/refs.ts";
-import { isBlank, missingParameters, normalizeRefs } from "../shared/validation.ts";
+import { isBlank, missingParameters, normalizeRefs, validationError } from "../shared/validation.ts";
 
 const PART = "Part";
 
 /** Required fields of Model_Part (spec). */
 const REQUIRED_PART_FIELDS = ["taxRate", "unity", "stock", "name", "partNumber"] as const;
+
+/** Tax rates a part can be created or changed with (spec, Update 2.0: "Parts", stricter validation). */
+const ALLOWED_TAX_RATES: readonly number[] = [0, 7, 19];
 
 /** Category 1 is "Standard" for parts (knowledge base, third-party source). */
 const DEFAULT_PART_CATEGORY_ID = "1";
@@ -72,6 +75,22 @@ function assertRequiredKeptOnUpdate(input: PlainObject): void {
 }
 
 /**
+ * Update 2.0 no longer creates or changes parts with a tax rate other than 0, 7 and 19 (spec,
+ * "General stricter validation in PUT and POST endpoints"): 422. A blank value is not checked
+ * here, the required-field rules answer it. Assumption: the message wording and that stored
+ * parts with other rates stay as they are.
+ */
+function assertAllowedTaxRate(input: PlainObject): void {
+  if (isBlank(input.taxRate)) return;
+  const rate = toNumber(input.taxRate, Number.NaN);
+  if (!ALLOWED_TAX_RATES.includes(rate)) {
+    throw validationError(
+      `Tax rate ${String(input.taxRate)} is not allowed for parts, allowed rates are ${ALLOWED_TAX_RATES.join(", ")}`,
+    );
+  }
+}
+
+/**
  * DELETE /Part/{partId} (extra route, missing in the spec): 409 while other objects reference
  * the part (positions of invoices, credit notes, orders, ...), so no reference dangles, like
  * for contacts; tag assignments are deleted with the part. Assumption: sevDesk refuses instead
@@ -95,8 +114,8 @@ function deletePart(context: RouteContext): RouteResult {
 }
 
 /**
- * Parts: list and get are generic. Create validates the spec's required fields and applies
- * defaults, update keeps them filled, create and update check unity and category (404) and
+ * Parts: list and get are generic. Create validates the spec's required fields and the tax
+ * rate (0, 7, 19) and applies defaults, update keeps them filled, create and update check unity and category (404) and
  * keep both net prices in sync, delete is an extra route (missing in the spec) that refuses
  * referenced parts, getStock reads the stored stock.
  * Assumption: "stock" is a plain stored field; invoices do not move it.
@@ -107,6 +126,7 @@ export const partRoutes: RouteDefinition[] = [
     path: "/Part",
     handler: (context) => {
       assertRequiredOnCreate(context.input);
+      assertAllowedTaxRate(context.input);
       const part = createDocument(context.tenant, PART, partFields(context.tenant, context.input), {
         defaults: {
           category: toRef(DEFAULT_PART_CATEGORY_ID, "Category"),
@@ -124,6 +144,7 @@ export const partRoutes: RouteDefinition[] = [
       const id = pathParam(context, "partId");
       context.tenant.store.collection(PART).require(id);
       assertRequiredKeptOnUpdate(context.input);
+      assertAllowedTaxRate(context.input);
       return {
         objects: updateDocument(context.tenant, PART, id, partFields(context.tenant, context.input)),
       };

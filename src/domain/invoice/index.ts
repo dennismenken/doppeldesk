@@ -10,7 +10,7 @@ export const invoiceModule: DomainModule = {
 
 // Services for seeds and other domain modules.
 export { bookInvoiceAmount, isPartiallyPaid } from "./booking.ts";
-export { cancelInvoice, cancellationOf } from "./cancellation.ts";
+export { cancelInvoice } from "./cancellation.ts";
 export { INVOICE_PAYABLE, INVOICE_SENDABLE, INVOICE_STATUS } from "./constants.ts";
 export { createInvoiceFromOrder, createInvoiceReminder } from "./derived.ts";
 export { createInvoice, type SavedInvoice, saveInvoice } from "./factory.ts";

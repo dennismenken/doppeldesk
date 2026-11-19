@@ -3,7 +3,7 @@ import { getModel, listModel } from "../../routes/generic.ts";
 import type { RouteDefinition } from "../../routes/types.ts";
 import { BOOK_AMOUNT_UNVALIDATED_FIELDS } from "../shared/payments.ts";
 import { documentPositionOrder } from "../shared/positions.ts";
-import { CREDIT_NOTE, CREDIT_NOTE_POS, CREDIT_NOTE_POSITIONS } from "./constants.ts";
+import { CREDIT_NOTE, CREDIT_NOTE_POS, CREDIT_NOTE_POSITIONS, HEAD_EXTRA_FIELDS } from "./constants.ts";
 import {
   bookCreditNoteAmount,
   enshrineCreditNote,
@@ -29,6 +29,11 @@ export const creditNoteRoutes: readonly RouteDefinition[] = [
   {
     method: "POST",
     path: "/CreditNote/Factory/saveCreditNote",
+    factoryParts: [
+      { field: "creditNote", responseField: "creditNote", extraFields: HEAD_EXTRA_FIELDS },
+      { field: "creditNotePosSave", responseField: "creditNotePos" },
+      { field: "discountSave" },
+    ],
     handler: (context) => ({ objects: saveCreditNote(context.tenant, context.input) }),
   },
   {

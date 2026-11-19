@@ -567,7 +567,7 @@ Seed-Vorschlag (Annahme, nur Felder aus der SPEC-Liste, Werte erfunden):
 ## 14. Umsetzungsfolgen für DoppelDesk
 
 1. Zusätzliche Referenz-Endpunkte außerhalb der SPEC bereitstellen: `StaticCountry`, `Category`, `Unity`, `SevUser`, `SevClient`, `SevSequence`, ggf. `TaxRule`. Sie nutzen das schemalose Dokumentenmodell und werden vom Seed gefüllt.
-2. Seed-Stufen: `basic` enthält Länder (mindestens DE, AT, CH plus die Liste aus Abschnitt 5), Kategorien (Abschnitt 3.1), CommunicationWayKeys (4.3), Einheiten (7), einen SevUser, einen SevClient, ein Offline-CheckAccount. `demo` ergänzt Kontakte mit Adressen und Kommunikationswegen, Artikel und Rechnungen.
+2. Seed-Stufen: `none` enthält Länder (mindestens DE, AT, CH plus die Liste aus Abschnitt 5), Kategorien (Abschnitt 3.1), CommunicationWayKeys (4.3), Einheiten (7), einen SevUser, einen SevClient und das mitgelieferte Basiskonto (Offline-CheckAccount). `basic` ergänzt Bankkonto und Kasse. `demo` ergänzt Kontakte mit Adressen und Kommunikationswegen, Artikel und Rechnungen.
 3. Paginierung zentral: `limit` 1 bis 1000 prüfen, sonst 400 mit der Meldung aus 2.2. `countAll` liefert `total`.
 4. Fehlerformat zentral: `{"objects": null, "error": {"message", "exceptionUUID"}}`.
 5. Kundennummer: Nummernkreis-Mechanik mit `getNextCustomerNumber` und `checkCustomerNumberAvailability`, Format als konfigurierbare Annahme.

@@ -2,10 +2,11 @@ import type { PlainObject } from "../../lib/object.ts";
 import { startOfBerlinDay, toIso } from "../../lib/time.ts";
 import type { Doc } from "../../store/collection.ts";
 import type { Tenant } from "../../tenant/tenant.ts";
+import { ORDER } from "../order/index.ts";
 import { createDocument, patchDocument } from "../shared/documents.ts";
 import { roundMoney, toNumber } from "../shared/money.ts";
 import { issueFreeNumber } from "../shared/numbering.ts";
-import { isRefTo, toRef } from "../shared/refs.ts";
+import { readRef, toRef } from "../shared/refs.ts";
 import { validationError } from "../shared/validation.ts";
 import {
   CANCELLABLE_STATUSES,
@@ -16,8 +17,9 @@ import {
   INVOICE_NUMBERED,
   INVOICE_STATUS,
 } from "./constants.ts";
+import { syncOrderStatus } from "./derived.ts";
 import { insertPosition } from "./factory.ts";
-import { requireInvoice, statusOf, typeOf } from "./guards.ts";
+import { cancellationOf, requireInvoice, statusOf, typeOf } from "./guards.ts";
 import { invoicePositions } from "./positions.ts";
 
 /** Header fields the cancellation invoice takes over from the original. */
@@ -74,7 +76,8 @@ const NEGATED_HEADER_FIELDS = [
  * priceGross, sumGross, sumNet (quantity stays positive) and payDate null.
  * The statuses of original and SR and the allowed source statuses are assumptions,
  * see the constants. Returns the cancellation invoice (assumption; the spec only says
- * "an invoice object").
+ * "an invoice object"). An original created from an order gives the order its status back
+ * (see syncOrderStatus).
  */
 export function cancelInvoice(tenant: Tenant, id: string): Doc {
   const original = requireInvoice(tenant, id);
@@ -114,14 +117,10 @@ export function cancelInvoice(tenant: Tenant, id: string): Doc {
     insertPosition(tenant, cancellation.id, copy);
   }
   patchDocument(tenant, INVOICE, original.id, { status: CANCELLED_ORIGINAL_STATUS });
+  // A cancelled invoice no longer counts for the order it was created from.
+  const origin = readRef(original.origin);
+  if (origin?.objectName === ORDER) syncOrderStatus(tenant, origin.id);
   return cancellation;
-}
-
-/** The cancellation invoice (SR) of an invoice, if one exists. */
-export function cancellationOf(tenant: Tenant, invoiceId: string): Doc | undefined {
-  return tenant.store
-    .collection(INVOICE)
-    .findOne((doc) => typeOf(doc) === "SR" && isRefTo(doc.origin, INVOICE, invoiceId));
 }
 
 /**

@@ -45,6 +45,22 @@ export interface RouteResult {
 
 export type RouteHandler = (context: RouteContext) => RouteResult | Promise<RouteResult>;
 
+/**
+ * A body part of a factory request that holds model data: an object or a list of objects
+ * ("invoice", "invoicePosSave"). The handler only sees the properties the part's model knows.
+ */
+export interface FactoryPart {
+  /** Request body field, e.g. "invoicePosSave". */
+  field: string;
+  /** Field of the response "objects" with the response model of the part, e.g. "invoicePos". */
+  responseField?: string;
+  /**
+   * Properties the domain accepts although no spec schema of the part declares them (they
+   * stay when the part is filtered).
+   */
+  extraFields?: readonly string[];
+}
+
 /** A route a domain module provides; overrides the generic spec route with the same key. */
 export interface RouteDefinition {
   method: HttpMethod;
@@ -62,6 +78,11 @@ export interface RouteDefinition {
    * paths ("invoice.deliveryDateUntil"); they are skipped by the request value check.
    */
   unvalidatedFields?: readonly string[];
+  /**
+   * Factory routes: body parts whose unknown properties are ignored silently, like unknown
+   * top-level fields of model writes (see withKnownFactoryParts).
+   */
+  factoryParts?: readonly FactoryPart[];
 }
 
 /** A domain module: the models it owns and its routes. */

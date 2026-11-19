@@ -8,9 +8,17 @@ import { shapeObjects } from "../serialize/serializer.ts";
 import type { SpecIndex } from "../spec/specIndex.ts";
 import type { Fault } from "../tenant/faults.ts";
 import type { TenantRegistry } from "../tenant/registry.ts";
+import type { Tenant } from "../tenant/tenant.ts";
 import { extractToken, queryWithoutToken, safeHeaders } from "./auth.ts";
 import { sendFault } from "./faultResponse.ts";
-import { initRequestState, requestState } from "./requestState.ts";
+import { bindTenant, initRequestState, requestState } from "./requestState.ts";
+
+declare module "fastify" {
+  interface FastifyContextConfig {
+    /** The resolved route a Fastify route was registered for; absent for unknown routes. */
+    route?: ResolvedRoute;
+  }
+}
 
 export interface ApiDependencies {
   basePath: string;
@@ -22,9 +30,10 @@ export interface ApiDependencies {
 }
 
 /**
- * Mounts the fake sevDesk API under the base path: token auth, request log, fault
- * injection, the request value check against the spec's request schema, every resolved
- * route, and sevDesk-style 404 for unknown routes.
+ * Mounts the fake sevDesk API under the base path: token auth, fault injection (both
+ * before the body is parsed, so a fault wins over unparseable bodies), request log, the
+ * request value check against the spec's request schema, every resolved route, and
+ * sevDesk-style 404 for unknown routes.
  */
 export function registerApi(app: FastifyInstance, deps: ApiDependencies): void {
   const { basePath, tenants } = deps;
@@ -32,8 +41,18 @@ export function registerApi(app: FastifyInstance, deps: ApiDependencies): void {
   app.addHook("onRequest", async (request, reply) => {
     if (!isApiUrl(request.url, basePath)) return;
     const state = initRequestState(request);
-    state.tenant = tenants.resolve(extractToken(request));
-    if (state.tenant === undefined) return reply.code(401).send(errorBody("Authentication required"));
+    const tenant = tenants.resolve(extractToken(request));
+    if (tenant === undefined) return reply.code(401).send(errorBody("Authentication required"));
+    bindTenant(state, tenant);
+    const route = request.routeOptions.config.route;
+    state.route = route?.path ?? null;
+    const method = route?.method ?? toHttpMethod(request.method);
+    if (method === undefined) return;
+    const fault = tenant.faults.take(method, {
+      path: relativePath(request.url, basePath),
+      route: state.route,
+    });
+    if (fault !== undefined) return answerFault(fault, tenant, request, reply, deps);
   });
 
   app.addHook("onResponse", async (request, reply) => {
@@ -44,19 +63,12 @@ export function registerApi(app: FastifyInstance, deps: ApiDependencies): void {
     app.route({
       method: route.method,
       url: toFastifyPath(basePath, route.path),
+      config: { route },
       handler: (request, reply) => handleRoute(route, request, reply, deps),
     });
   }
 
-  app.setNotFoundHandler(async (request, reply) => {
-    const tenant = requestState(request)?.tenant;
-    const method = toHttpMethod(request.method);
-    if (tenant !== undefined && method !== undefined) {
-      const fault = tenant.faults.take(method, { path: relativePath(request.url, basePath), route: null });
-      if (fault !== undefined) return answerFault(fault, request, reply, deps);
-    }
-    return reply.code(404).send(errorBody("Not found"));
-  });
+  app.setNotFoundHandler(async (_request, reply) => reply.code(404).send(errorBody("Not found")));
 }
 
 async function handleRoute(
@@ -68,13 +80,6 @@ async function handleRoute(
   const state = requestState(request);
   const tenant = state?.tenant;
   if (state === undefined || tenant === undefined) throw new ApiError(401, "Authentication required");
-  state.route = route.path;
-
-  const fault = tenant.faults.take(route.method, {
-    path: relativePath(request.url, deps.basePath),
-    route: route.path,
-  });
-  if (fault !== undefined) return answerFault(fault, request, reply, deps);
   if (route.operation !== undefined) {
     assertBodyMatchesSchema(
       deps.spec,
@@ -107,12 +112,11 @@ async function handleRoute(
 
 async function answerFault(
   fault: Fault,
+  tenant: Tenant,
   request: FastifyRequest,
   reply: FastifyReply,
   deps: ApiDependencies,
 ): Promise<FastifyReply> {
-  const tenant = requestState(request)?.tenant;
-  if (tenant === undefined) throw new ApiError(401, "Authentication required");
   const answered = await sendFault(fault, reply, tenant, deps.shutdown);
   if (!answered) logRequest(request, 0, deps.basePath);
   return reply;
@@ -129,10 +133,11 @@ function routeParams(template: string, raw: unknown): Record<string, string> {
 /** Writes one request-log entry (status 0 = connection dropped without response). */
 function logRequest(request: FastifyRequest, status: number, basePath: string): void {
   const state = requestState(request);
-  if (state?.tenant === undefined || state.logged) return;
+  if (state?.tenant === undefined || state.clockTime === undefined || state.logged) return;
   state.logged = true;
   state.tenant.requestLog.add({
-    time: new Date().toISOString(),
+    time: state.startedAtWall,
+    clockTime: state.clockTime,
     method: request.method,
     path: relativePath(request.url, basePath),
     query: queryWithoutToken(request.query),

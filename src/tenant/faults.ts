@@ -6,6 +6,9 @@ import { matchesPathPattern, type PathTarget, parsePathPattern } from "./pathPat
 export const FAULT_TYPES = ["status", "timeout", "invalid-json", "feature-lock"] as const;
 export type FaultType = (typeof FAULT_TYPES)[number];
 
+/** Status of a fault that does not set one (the "feature-lock" default; "status" faults require one). */
+export const DEFAULT_FAULT_STATUS = 500;
+
 /** Default timeout delay before answering 504. */
 export const DEFAULT_TIMEOUT_DELAY_MS = 30_000;
 
@@ -31,6 +34,34 @@ export interface Fault {
   userId: string | null;
   /** Remaining hits before the fault removes itself; null = unlimited. */
   remaining: number | null;
+}
+
+/** Fields every fault shows in the control API. */
+type FaultBase = Pick<Fault, "id" | "method" | "path" | "type" | "remaining">;
+
+/** A fault as the control API shows it: the common fields plus those that matter for its type. */
+export type FaultView = FaultBase &
+  Partial<Pick<Fault, "status" | "message" | "delayMs" | "hang" | "code" | "userId">>;
+
+/** Reduces a fault to the fields that have an effect for its type (no timeout settings on a status fault). */
+export function toFaultView(fault: Fault): FaultView {
+  const { id, method, path, type, remaining } = fault;
+  const base: FaultBase = { id, method, path, type, remaining };
+  switch (type) {
+    case "status":
+      return { ...base, status: fault.status, message: fault.message };
+    case "timeout":
+      return { ...base, delayMs: fault.delayMs, hang: fault.hang };
+    case "invalid-json":
+      return base;
+    case "feature-lock":
+      return {
+        ...base,
+        status: fault.status ?? DEFAULT_FAULT_STATUS,
+        code: fault.code,
+        userId: fault.userId,
+      };
+  }
 }
 
 /** Active faults of one tenant, matched in insertion order. */

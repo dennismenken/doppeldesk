@@ -31,7 +31,8 @@ export function matchesPathPattern(pattern: string, target: PathTarget): boolean
 
 /**
  * Reads a user-supplied path pattern (faults, request-log filter): trimmed and relative
- * to the base path. Throws ApiError 400 for patterns that could never match: a query string
+ * to the base path, with a leading slash ("Invoice/1/cancelInvoice" and
+ * "/api/v1/Invoice/1/cancelInvoice" both become "/Invoice/1/cancelInvoice"). Throws ApiError 400 for patterns that could never match: a query string
  * or fragment (patterns match the path only) and a "*" anywhere but at the end (only a
  * trailing "*" is a wildcard, "{param}" stands for one segment).
  */
@@ -46,10 +47,10 @@ export function parsePathPattern(input: string, basePath: string, label: string)
       `${label} may contain "*" only at the end, use a template such as /Invoice/{invoiceId}/cancelInvoice for one segment`,
     );
   }
-  return stripBasePath(pattern, basePath);
+  return stripBasePath(pattern.startsWith("/") ? pattern : `/${pattern}`, basePath);
 }
 
-/** Removes the base path prefix from a user-supplied pattern, if present. */
+/** Removes the base path prefix from a pattern with leading slash, if present. */
 function stripBasePath(pattern: string, basePath: string): string {
   if (pattern === basePath) return "/";
   return pattern.startsWith(`${basePath}/`) ? pattern.slice(basePath.length) : pattern;

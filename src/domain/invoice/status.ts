@@ -3,9 +3,11 @@ import type { PlainObject } from "../../lib/object.ts";
 import { toIso } from "../../lib/time.ts";
 import type { Doc } from "../../store/collection.ts";
 import type { Tenant } from "../../tenant/tenant.ts";
+import { ORDER } from "../order/index.ts";
 import { deleteWithDependents, patchDocument } from "../shared/documents.ts";
 import { releaseNumber } from "../shared/numbering.ts";
 import { unlinkPayments } from "../shared/payments.ts";
+import { readRef } from "../shared/refs.ts";
 import { sendBy, sendViaEmail, UNSENT_FIELDS } from "../shared/sending.ts";
 import { validationError } from "../shared/validation.ts";
 import { assertNotCancellationPair } from "./cancellation.ts";
@@ -16,6 +18,7 @@ import {
   INVOICE_SENDABLE,
   INVOICE_STATUS,
 } from "./constants.ts";
+import { syncOrderStatus } from "./derived.ts";
 import { numberRangeFor } from "./factory.ts";
 import { assertNotEnshrined, assertNotRecurring, requireInvoice, statusOf, typeOf } from "./guards.ts";
 
@@ -94,6 +97,8 @@ export function resetInvoiceToDraft(tenant: Tenant, id: string): Doc {
  * (live-verified for credit notes, assumption for invoices).
  * Assumption: deleting a non-draft answers HTTP 409, as the spec declares 409 for all
  * DELETE operations and a third-party client maps 409 to "deleting a non-draft".
+ * A draft created from an order (createInvoiceFromOrder) gives the order its status back:
+ * it is recomputed from the remaining invoices. Origin references of other documents stay.
  */
 export function deleteInvoice(tenant: Tenant, id: string): void {
   const invoice = requireInvoice(tenant, id);
@@ -106,4 +111,6 @@ export function deleteInvoice(tenant: Tenant, id: string): void {
   if (typeof invoice.invoiceNumber === "string") {
     releaseNumber(tenant, numberRangeFor(typeOf(invoice)), invoice.invoiceNumber);
   }
+  const origin = readRef(invoice.origin);
+  if (origin?.objectName === ORDER) syncOrderStatus(tenant, origin.id);
 }

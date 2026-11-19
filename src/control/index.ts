@@ -8,6 +8,7 @@ import { type HttpMethod, toHttpMethod } from "../lib/routePath.ts";
 import { isClockInstant, parseDateInput, toIso } from "../lib/time.ts";
 import type { DomainModule, ResolvedRoute } from "../routes/types.ts";
 import type { LoadedSpec } from "../spec/loader.ts";
+import { toFaultView } from "../tenant/faults.ts";
 import { parsePathPattern } from "../tenant/pathPattern.ts";
 import type { TenantRegistry } from "../tenant/registry.ts";
 import { parseSnapshot } from "../tenant/snapshot.ts";
@@ -120,11 +121,13 @@ export function registerControlApi(app: FastifyInstance, deps: ControlDependenci
         return { status: "ok" };
       });
 
-      control.get("/faults", async (request) => ({ faults: tenantOf(request, tenants).faults.list() }));
+      control.get("/faults", async (request) => ({
+        faults: tenantOf(request, tenants).faults.list().map(toFaultView),
+      }));
 
       control.post("/faults", async (request, reply) => {
         const fault = tenantOf(request, tenants).faults.add(request.body, config.basePath);
-        return reply.code(201).send({ fault });
+        return reply.code(201).send({ fault: toFaultView(fault) });
       });
 
       control.delete("/faults", async (request) => {

@@ -10,6 +10,33 @@ gepflegt, und jede Veröffentlichung bekommt einen Eintrag.
 
 ### Geändert
 
+- Der Query-Parameter `token` authentifiziert nicht mehr, wie bei sevDesk seit dem 29.04.2025.
+  Ohne `Authorization`-Header folgt 401.
+- Störfälle greifen direkt nach der Authentifizierung, vor dem Parsen des Bodys, und gewinnen
+  damit über Body-Parserfehler. Das Anfrageprotokoll zeigt für so beantwortete Anfragen
+  `body: null`.
+- Störfall-Pfade und der Filter `path` des Anfrageprotokolls werden normalisiert: ein fehlender
+  führender Slash wird ergänzt und ein führender Basispfad entfernt.
+- `GET` und `POST /__doppeldesk/faults` zeigen nur die typrelevanten Felder je Störfalltyp.
+- Das Anfrageprotokoll hat das Feld `clockTime` (Mandantenuhr, Europe/Berlin), `time` ist der
+  Beginn der Anfrage statt des Zeitpunkts nach der Antwort.
+- `POST /{Modell}` und `PUT /{Modell}/{id}` mit Spec-Operation ignorieren unbekannte Felder
+  (Contact, ContactAddress, CommunicationWay, Part, Tag, CheckAccount und weitere).
+- Die Factories `saveInvoice`, `saveVoucher`, `saveCreditNote` und `saveOrder` ignorieren
+  unbekannte Eigenschaften in Kopf, Positionen und Rabatten (`discountSave`) ebenso. Gespeichert
+  und zurückgegeben wird nur, was das Modell kennt.
+- `cancelInvoice` berechnet den Status des Quellauftrags neu, wenn die Rechnung aus einem
+  Auftrag stammt (ohne weitere Rechnung wieder 500).
+- Seed `none` ist ein frisch registrierter Account mit Referenzdaten und Basiskonto (ID 1),
+  `basic` ergänzt Bankkonto und Kasse. Die Stammdaten der Kommunikationsweg-Schlüssel stehen nur
+  noch in `domain/contact/communicationWayKeys.ts`.
+- Nach dem Löschen eines Rechnungsentwurfs wird der Status des Quellauftrags aus den
+  verbleibenden Rechnungen neu berechnet. Beim Anlegen zählen alle bestehenden Rechnungen.
+- Das Zurücksetzen eines Belegs (`resetToOpen`, `resetToDraft`) löst nur dessen eigene Buchungen.
+  Eine Transaktion mit weiteren Buchungen bleibt gebucht.
+- Beträge direkt angelegter oder geänderter Transaktionen werden auf 2 Stellen gerundet.
+- `POST` und `PUT /Part` lehnen einen Steuersatz außer 0, 7 und 19 ab (422).
+- Belege speichern kein `mapAll` mehr.
 - `bookAmount` prüft den Betrag gegen den offenen Betrag je Buchungstyp (422 bei Abweichung).
 - `resetToDraft` leert `sendType` und `sendDate` bei Rechnungen und Gutschriften.
 - Stornorechnungen und stornierte Originale lehnen `resetToOpen`, `resetToDraft` und
@@ -67,6 +94,9 @@ gepflegt, und jede Veröffentlichung bekommt einen Eintrag.
 
 ### Behoben
 
+- Anfragen, die der Node-HTTP-Parser vor Fastify abweist (rohe Nicht-ASCII-Zeichen in der URL,
+  ungültige Request-Zeile, Header-Overflow, Request-Timeout), ergeben das sevDesk-Fehlerformat
+  (400, 431, 408) statt der Standardantwort von Node.
 - Leere oder `null`-Datumswerte in `saveInvoice` werden nicht mehr als `""` gespeichert.
 - `limit`, `offset` und `countAll` wirken auch bei `ReceiptGuidance` und `getRelatedObjects`.
 - Ein belegter Port beendet den Start mit einer einzeiligen Meldung statt eines Stacktraces.

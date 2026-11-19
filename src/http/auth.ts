@@ -4,17 +4,20 @@ import { isPlainObject } from "../lib/object.ts";
 
 /**
  * API token of a request: "Authorization: <token>" (sevDesk style), tolerating a
- * "Bearer " prefix, or the "token" query parameter.
+ * "Bearer " prefix. sevDesk removed the "token" query parameter on 2025-04-29
+ * (https://tech.sevdesk.com/api_news/posts/2025_02_06-authentication-method-removed/),
+ * so a token passed that way does not authenticate.
  */
 export function extractToken(request: FastifyRequest): string | undefined {
   const header = request.headers.authorization;
   if (typeof header === "string" && header.trim() !== "") return header.trim().replace(/^Bearer\s+/i, "");
-  const query = request.query;
-  if (isPlainObject(query) && typeof query.token === "string" && query.token !== "") return query.token;
   return undefined;
 }
 
-/** Query without the "token" parameter (never handed to handlers or logged). */
+/**
+ * Query without the "token" parameter. Clients may still send it; it is stripped so it
+ * never reaches handlers or the request log.
+ */
 export function queryWithoutToken(query: unknown): Record<string, unknown> {
   if (!isPlainObject(query)) return {};
   const { token: _token, ...rest } = query;

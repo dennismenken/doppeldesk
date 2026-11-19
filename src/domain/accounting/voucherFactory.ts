@@ -287,7 +287,6 @@ export function saveVoucher(tenant: Tenant, input: PlainObject): SavedVoucher {
       ? createDocument(tenant, VOUCHER, normalized, {
           defaults: {
             currency: "EUR",
-            mapAll: true,
             paidAmount: 0,
             payDate: null,
             enshrined: null,
@@ -332,6 +331,10 @@ export const voucherFactoryRoutes: readonly RouteDefinition[] = [
   {
     method: "POST",
     path: "/Voucher/Factory/saveVoucher",
+    factoryParts: [
+      { field: "voucher", responseField: "voucher" },
+      { field: "voucherPosSave", responseField: "voucherPos" },
+    ],
     handler: ({ tenant, input }) => {
       const saved = saveVoucher(tenant, input);
       return { objects: { voucher: saved.voucher, voucherPos: saved.voucherPos, filename: saved.filename } };

@@ -78,6 +78,17 @@ export const HEAD_REFS: Readonly<Record<string, string>> = {
   refSrcVoucher: VOUCHER,
 };
 
+/**
+ * Head fields the domain accepts although the spec's credit note schemas do not declare them:
+ * the source document references (documented in the booking category rules), the origin and
+ * the end of the delivery period.
+ */
+export const HEAD_EXTRA_FIELDS: readonly string[] = [
+  "origin",
+  "deliveryDateUntil",
+  ...Object.keys(HEAD_REFS),
+];
+
 /** Date fields of the credit note head (accepted as unix timestamp, dd.mm.yyyy or ISO). */
 export const HEAD_DATES: readonly string[] = ["creditNoteDate", "deliveryDate", "deliveryDateUntil"];
 

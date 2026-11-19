@@ -33,6 +33,12 @@ export const ORDER_SENDABLE: SendableModel = {
   requiresContact: false,
 };
 
+/**
+ * Head fields the domain accepts although the spec's order schemas do not declare them:
+ * "typeOrigin" (documented in the spec text) names the object type of a scalar "origin".
+ */
+export const HEAD_EXTRA_FIELDS: readonly string[] = ["typeOrigin"];
+
 /** Order types: AN estimate (offer), AB order confirmation (contract note), LI delivery note (packing list). */
 export const ORDER_TYPES = ["AN", "AB", "LI"] as const;
 export type OrderType = (typeof ORDER_TYPES)[number];

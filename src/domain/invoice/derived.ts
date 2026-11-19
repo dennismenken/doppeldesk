@@ -15,10 +15,9 @@ import {
   requireRefTo,
   validationError,
 } from "../shared/validation.ts";
-import { cancellationOf } from "./cancellation.ts";
 import { INVOICE, INVOICE_STATUS } from "./constants.ts";
 import { createInvoice, type SavedInvoice } from "./factory.ts";
-import { requireInvoice, statusOf, typeOf } from "./guards.ts";
+import { cancellationOf, requireInvoice, statusOf, typeOf } from "./guards.ts";
 
 /** Header fields an invoice takes over from its order. */
 const ORDER_HEADER_FIELDS = [
@@ -99,15 +98,44 @@ export function createInvoiceFromOrder(tenant: Tenant, input: PlainObject): Save
   }
 
   const saved = createInvoice(tenant, header, positions);
-  // Spec order status table: 750 "partially calculated", 1000 "calculated".
-  // Assumption: TR/AR invoices set 750, RE/ER set 1000.
-  const partiallyCalculated = partialType === "TR" || partialType === "AR";
-  setOrderStatus(
-    tenant,
-    order.id,
-    partiallyCalculated ? ORDER_STATUS.partiallyCalculated : ORDER_STATUS.calculated,
-  );
+  syncOrderStatus(tenant, order.id);
   return saved;
+}
+
+/**
+ * Invoices that count for an order: the invoices created from it (origin on the order) without
+ * cancellation invoices (SR, their origin is an invoice anyway) and without cancelled originals.
+ * Deleted drafts are gone from the store and do not count either.
+ */
+function activeInvoicesOfOrder(tenant: Tenant, orderId: string): Doc[] {
+  return tenant.store
+    .collection(INVOICE)
+    .find(
+      (invoice) =>
+        isRefTo(invoice.origin, ORDER, orderId) &&
+        typeOf(invoice) !== "SR" &&
+        cancellationOf(tenant, invoice.id) === undefined,
+    );
+}
+
+/**
+ * Sets the status of an order from the invoices created from it. Spec order status table: 750
+ * "partially calculated", 1000 "calculated". Assumptions: partial invoices (TR, AR) alone give
+ * 750, any other invoice (RE, ER) gives 1000; an order without invoices is "accepted" (500),
+ * as invoicing normally follows the acceptance (the status before the first invoice is not
+ * remembered). Called after an invoice from the order was created, deleted or cancelled.
+ */
+export function syncOrderStatus(tenant: Tenant, orderId: string): void {
+  const order = tenant.store.collection(ORDER).get(orderId);
+  if (order === undefined) return;
+  const types = activeInvoicesOfOrder(tenant, orderId).map(typeOf);
+  const status =
+    types.length === 0
+      ? ORDER_STATUS.accepted
+      : types.every((type) => type === "TR" || type === "AR")
+        ? ORDER_STATUS.partiallyCalculated
+        : ORDER_STATUS.calculated;
+  if (Number(order.status) !== status) setOrderStatus(tenant, orderId, status);
 }
 
 /** Partial amount of createInvoiceFromOrder: "percentage" of the order or a "net"/"gross" amount. */
@@ -135,15 +163,10 @@ function readPartialAmount(tenant: Tenant, order: Doc, input: PlainObject): Part
 
   const field = input.type === "gross" ? "sumGross" : "sumNet";
   const orderTotal = toNumber(order[field]);
-  const invoiced = tenant.store
-    .collection(INVOICE)
-    .find(
-      (invoice) =>
-        isRefTo(invoice.origin, ORDER, order.id) &&
-        typeOf(invoice) !== "SR" &&
-        cancellationOf(tenant, invoice.id) === undefined,
-    )
-    .reduce((sum, invoice) => sum + toNumber(invoice[field]), 0);
+  const invoiced = activeInvoicesOfOrder(tenant, order.id).reduce(
+    (sum, invoice) => sum + toNumber(invoice[field]),
+    0,
+  );
   const remaining = roundMoney(orderTotal - invoiced);
   const requested = input.type === "percentage" ? (orderTotal * amount) / 100 : amount;
   if (requested > remaining + MONEY_TOLERANCE) {

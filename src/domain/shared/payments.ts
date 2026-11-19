@@ -15,6 +15,7 @@ import {
 import { contactName, contactOf } from "./contacts.ts";
 import { createDocument, patchDocument } from "./documents.ts";
 import { MONEY_TOLERANCE, roundMoney, toNumber } from "./money.ts";
+import { referencesTo } from "./references.ts";
 import { isRefTo, readRef, refId, toRef } from "./refs.ts";
 import {
   expectedRefError,
@@ -58,8 +59,11 @@ const AMOUNT_RULES: Readonly<Record<BookingType, "equal" | "atMost" | "atLeast" 
  */
 export const BOOK_AMOUNT_UNVALIDATED_FIELDS: readonly string[] = ["date"];
 
+/** Field of the booking logs that links the transaction a document is booked on. */
+export const BOOKING_LINK_FIELD = "checkAccountTransaction";
+
 /** Log fields that only serve unlinking and are not part of the API response. */
-const INTERNAL_LOG_FIELDS = ["checkAccount", "checkAccountTransaction", "transactionCreated"] as const;
+const INTERNAL_LOG_FIELDS = ["checkAccount", BOOKING_LINK_FIELD, "transactionCreated"] as const;
 
 /** How bookAmount works for one document model (invoice, credit note, voucher). */
 export interface PayableModel {
@@ -154,7 +158,7 @@ export function bookAmount(
     [payable.logAmountField]: request.amount,
     bookingDate: toIso(request.date),
     checkAccount: toRef(request.account.id, CHECK_ACCOUNT),
-    checkAccountTransaction: toRef(transaction.id, CHECK_ACCOUNT_TRANSACTION),
+    [BOOKING_LINK_FIELD]: toRef(transaction.id, CHECK_ACCOUNT_TRANSACTION),
     transactionCreated: created,
   });
   return publicLog(log);
@@ -162,31 +166,60 @@ export function bookAmount(
 
 /**
  * Detaches all payments of a document (resetToOpen/resetToDraft: "Linked transactions will
- * be unlinked"). Transactions created by bookAmount are removed, linked transactions return
- * to status 100; balances are recomputed. The log entries stay as history. Throws 422 when
- * a linked transaction is enshrined (spec).
+ * be unlinked"). The log entries stay as history. A transaction other documents are still
+ * booked on stays booked and only loses this document; one without any other booking is
+ * removed when bookAmount created it, otherwise it returns to status 100. Balances are
+ * recomputed. Throws 422 when a linked transaction is enshrined (spec).
+ * Assumption: when the booking that created a shared transaction is unlinked first, the
+ * remaining bookings take over the transaction, so it goes away with the last of them.
  */
 export function unlinkPayments(tenant: Tenant, payable: PayableModel, documentId: string): void {
   const logs = tenant.store.collection(payable.logModel);
   const transactions = tenant.store.collection(CHECK_ACCOUNT_TRANSACTION);
-  const linked = logs
-    .find((log) => isRefTo(log[payable.logRef], payable.model, documentId))
-    .flatMap((log) => {
-      const transactionId = refId(log.checkAccountTransaction);
-      return transactionId === undefined ? [] : [{ log, transaction: transactions.get(transactionId) }];
-    });
-  if (linked.some(({ transaction }) => !isBlank(transaction?.enshrined))) {
+  const ownLogs = logs.find(
+    (log) =>
+      isRefTo(log[payable.logRef], payable.model, documentId) &&
+      refId(log.checkAccountTransaction) !== undefined,
+  );
+  const linked = ownLogs.flatMap((log) => {
+    const transaction = transactions.get(refId(log.checkAccountTransaction) ?? "");
+    return transaction === undefined ? [] : [{ log, transaction }];
+  });
+  if (linked.some(({ transaction }) => !isBlank(transaction.enshrined))) {
     throw validationError("A linked transaction is enshrined, the payments can not be unlinked");
   }
+  for (const log of ownLogs) logs.update(log.id, { checkAccountTransaction: null });
+
+  const unlinked = new Map<string, { transaction: Doc; created: boolean }>();
   for (const { log, transaction } of linked) {
-    if (transaction !== undefined) {
-      if (log.transactionCreated === true) transactions.delete(transaction.id);
-      else transactions.update(transaction.id, { status: CREATED_TRANSACTION_STATUS });
-      const accountId = refId(transaction.checkAccount);
-      if (accountId !== undefined) syncBalance(tenant, accountId);
-    }
-    logs.update(log.id, { checkAccountTransaction: null });
+    const created = log.transactionCreated === true || unlinked.get(transaction.id)?.created === true;
+    unlinked.set(transaction.id, { transaction, created });
   }
+  for (const { transaction, created } of unlinked.values()) {
+    releaseTransaction(tenant, transaction, created);
+    const accountId = refId(transaction.checkAccount);
+    if (accountId !== undefined) syncBalance(tenant, accountId);
+  }
+}
+
+/**
+ * Settles a transaction after documents were unlinked from it. "created" tells that
+ * bookAmount made it. Without remaining bookings it is deleted (created) or reset to
+ * status 100; with remaining bookings it stays and, when created, their logs inherit the flag.
+ */
+function releaseTransaction(tenant: Tenant, transaction: Doc, created: boolean): void {
+  const remaining = referencesTo(tenant, CHECK_ACCOUNT_TRANSACTION, transaction.id).filter(
+    (reference) => reference.field === BOOKING_LINK_FIELD,
+  );
+  const transactions = tenant.store.collection(CHECK_ACCOUNT_TRANSACTION);
+  if (remaining.length === 0) {
+    if (created) transactions.delete(transaction.id);
+    else transactions.update(transaction.id, { status: CREATED_TRANSACTION_STATUS });
+    return;
+  }
+  if (!created) return;
+  for (const { model, doc } of remaining)
+    tenant.store.collection(model).update(doc.id, { transactionCreated: true });
 }
 
 /** Gross amount still to be paid (sign-independent: credit notes and SR carry negative sums). */

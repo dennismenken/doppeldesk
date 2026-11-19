@@ -58,8 +58,10 @@ befüllen, exportieren und importieren lässt.
   | Stammdaten | Mandant (`SevClient`), Benutzer, Länder, Kategorien, Artikel, Referenzdaten |
 
   Die genauen Routen zeigt `GET /__doppeldesk/routes`.
-- **Seeds:** `none`, `basic` (Referenzdaten) oder `demo` (Beispielbestand mit Kontakten,
-  Rechnungen, Gutschriften, Aufträgen, Belegen und Bankdaten).
+- **Seeds:** `none` (frisch registrierter sevDesk-Account ohne Geschäftsdaten: Mandant, Benutzer,
+  Länder, Kategorien, Kommunikationsarten, Einheiten, Steuerregeln und das mitgelieferte
+  Basiskonto), `basic` (Vorgabe, `none` plus Bankkonto und Kasse) oder `demo` (`basic` plus
+  Beispielbestand mit Kontakten, Rechnungen, Gutschriften, Aufträgen, Belegen und Bankdaten).
 - **Persistenz:** wahlweise nur im Speicher oder als Datei.
 - **Mehrere Mandanten:** jeder API-Token ist ein eigener Mandant.
 - **Kontroll-API** unter `/__doppeldesk`: Zurücksetzen, Seed, Uhr, Anfrageprotokoll,
@@ -122,7 +124,7 @@ Meldung ab.
 | `DOPPELDESK_CONTROL_TOKEN` | leer | schützt die Kontroll-API (Header `X-DoppelDesk-Control-Token`); leer heißt ungeschützt |
 | `DOPPELDESK_PERSIST` | `memory` | `memory` oder `file` |
 | `DOPPELDESK_DATA_DIR` | `./data` | Ablage für `state.json` und den Spec-Cache (im Container `/data`) |
-| `DOPPELDESK_SEED` | `basic` | `none`, `basic` oder `demo` |
+| `DOPPELDESK_SEED` | `basic` | `none` (nur Referenzdaten und Basiskonto), `basic` (zusätzlich Bankkonto und Kasse) oder `demo` (zusätzlich Beispielbestand) |
 | `DOPPELDESK_LOG_LEVEL` | `info` | `fatal`, `error`, `warn`, `info`, `debug`, `trace` oder `silent` |
 | `DOPPELDESK_REQUEST_LOG_SIZE` | `1000` | Einträge im Anfrageprotokoll je Mandant |
 
@@ -224,15 +226,15 @@ verlangen alle Endpunkte außer `/health` zusätzlich den Header `X-DoppelDesk-C
 | `POST /reset` | Mandant leeren und Seed anwenden, Body `{"seed":"none"\|"basic"\|"demo"}` optional (ohne Body gilt `DOPPELDESK_SEED`); ein Body, der nicht als JSON-Objekt gesendet wird, ein anderer Schlüssel als `seed` oder `seed` im Query-String ergibt 400; leert auch Uhr, Störfälle und Protokoll |
 | `GET /state`, `PUT /state` | Snapshot des Mandanten exportieren bzw. importieren; ein Snapshot eines anderen Mandanten wird auf dessen `sevClientId` umgeschrieben |
 | `GET /clock`, `POST /clock` | Uhr lesen bzw. setzen; `now` muss zwischen April 1893 und dem Jahr 9999 liegen, `frozen` ein Boolean sein |
-| `GET /requests`, `DELETE /requests` | Anfrageprotokoll lesen (Filter `path` als Pfadmuster wie bei den Störfällen, `method`, `limit`) bzw. leeren |
-| `GET /faults`, `POST /faults`, `DELETE /faults`, `DELETE /faults/{id}` | Störfälle verwalten |
+| `GET /requests`, `DELETE /requests` | Anfrageprotokoll lesen (Filter `path` als Pfadmuster wie bei den Störfällen, `method`, `limit`) bzw. leeren; jeder Eintrag trägt `time` (UTC, Beginn der Anfrage) und `clockTime` (Mandantenuhr, Europe/Berlin) |
+| `GET /faults`, `POST /faults`, `DELETE /faults`, `DELETE /faults/{id}` | Störfälle verwalten; die Ausgabe zeigt nur die typrelevanten Felder (siehe „Störfälle“) |
 
 Beispiele:
 
 ```bash
 CTRL=http://localhost:8080/__doppeldesk
 
-# Zurücksetzen auf einen leeren Mandanten
+# Zurücksetzen auf einen frischen Account ohne Geschäftsdaten (Referenzdaten und Basiskonto bleiben)
 curl -X POST "$CTRL/reset" -H "$AUTH" -H "$JSON" -d '{"seed":"none"}'
 
 # Demo-Bestand laden
@@ -260,8 +262,15 @@ genau dieser Pfad), eine Vorlage (`/Invoice/{invoiceId}/cancelInvoice`, Paramete
 oder ein Präfix: `/Invoice/*` trifft `/Invoice` und alles darunter, aber nicht `/InvoicePos`;
 `/Invoice*` ist ein reines Zeichenpräfix und trifft auch `/InvoicePos`. Muster vergleichen nur den Pfad; ein Query-String oder
 Fragment (`?`, `#`) im Muster ergibt 400, ebenso ein `*`, das nicht am Ende steht (für ein einzelnes
-Segment dient eine Vorlage). Dieselben Muster gelten für den Filter `path` des
-Anfrageprotokolls.
+Segment dient eine Vorlage). Pfade werden normalisiert: ein fehlender führender Slash wird ergänzt
+und ein führender Basispfad entfernt, also `Invoice/1/cancelInvoice`, `/Invoice/1/cancelInvoice`
+und `/api/v1/Invoice/1/cancelInvoice` sind gleich. Dieselben Muster gelten für den Filter `path`
+des Anfrageprotokolls.
+
+Ein Störfall greift direkt nach der Authentifizierung, vor dem Lesen des Bodys: Er gewinnt über
+Body-Fehler (unlesbares JSON, falscher Content-Type), ein ungültiger Token ergibt weiter 401. Im
+Anfrageprotokoll hat eine so beantwortete Anfrage `body: null`. HEAD-Anfragen auf GET-Routen
+verbrauchen GET-Störfälle.
 
 | Typ | Wirkung |
 | --- | --- |
@@ -269,6 +278,12 @@ Anfrageprotokolls.
 | `timeout` | wartet `delayMs` (Vorgabe 30000) und antwortet dann 504; mit `hang: true` wird die Verbindung ohne Antwort geschlossen. Beim Herunterfahren endet das Warten sofort, die Verbindung wird ohne Antwort geschlossen |
 | `invalid-json` | HTTP 200 mit abgeschnittenem JSON |
 | `feature-lock` | Meldung `Feature with the code '<code>' is not available for the user id <id>`; `code` ist Pflicht, `status` Vorgabe 500 |
+
+`GET` und `POST /faults` liefern nur die typrelevanten Felder. Immer enthalten sind `id`, `method`,
+`path`, `type` und `remaining`. Dazu kommt bei `status` `status` und `message`, bei `timeout`
+`delayMs` und `hang`, bei `invalid-json` nichts, bei `feature-lock` `status` (wirksam, Vorgabe 500),
+`code` und `userId` (`null` steht für den ersten `SevUser` des Mandanten). Die Vorgaben gelten
+intern weiter, sie erscheinen nur nicht in der Ausgabe.
 
 ```bash
 # Der nächste POST unter /Invoice schlägt einmalig mit 503 fehl
@@ -294,7 +309,9 @@ Vorher prüft DoppelDesk die Werte jedes Request-Bodys gegen das Request-Schema 
 Ein Wert, der sich nicht als der deklarierte Typ lesen lässt (ein Objekt in einem Textfeld,
 `abc` in einem Zahlenfeld, `maybe` in einem Boolean-Feld, ein unlesbares Datum), ergibt 400
 `Invalid value given for '<feld>'`. Generische `POST`-Routen verlangen zusätzlich die
-Pflichtfelder des Request-Schemas. Bekannte Fehler der Spezifikation korrigiert
+Pflichtfelder des Request-Schemas. `POST /{Model}` und `PUT /{Model}/{id}` mit Spec-Operation
+übernehmen nur Eigenschaften, die das Modell kennt (Request-Body- und Antwortschema, dazu
+Server-Felder und `mapAll`); unbekannte Felder werden ohne Fehler ignoriert. Bekannte Fehler der Spezifikation korrigiert
 `src/spec/patches.ts` direkt nach dem Laden.
 
 Wie eine neue Domain-Route entsteht, steht in [docs/architektur.md](docs/architektur.md),

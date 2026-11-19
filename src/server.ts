@@ -4,7 +4,7 @@ import { registerControlApi } from "./control/index.ts";
 import { domainModules } from "./domain/index.ts";
 import { registerApi } from "./http/api.ts";
 import { redactTokenInUrl } from "./http/auth.ts";
-import { frameworkErrorHandler, registerErrorHandler } from "./http/errorHandler.ts";
+import { clientErrorHandler, frameworkErrorHandler, registerErrorHandler } from "./http/errorHandler.ts";
 import { parseQuery, registerBodyParsers } from "./http/parsing.ts";
 import { buildRoutes } from "./routes/registry.ts";
 import { applySeed } from "./seed/index.ts";
@@ -83,6 +83,7 @@ function createApp(config: Config): FastifyInstance {
     bodyLimit: BODY_LIMIT_BYTES,
     routerOptions: { ignoreTrailingSlash: true, querystringParser: parseQuery },
     frameworkErrors: frameworkErrorHandler,
+    clientErrorHandler,
   });
   registerBodyParsers(app);
   registerErrorHandler(app);

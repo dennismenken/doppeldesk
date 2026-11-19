@@ -33,6 +33,11 @@ export const invoiceRoutes: readonly RouteDefinition[] = [
     method: "POST",
     path: "/Invoice/Factory/saveInvoice",
     unvalidatedFields: SAVE_INVOICE_UNVALIDATED_FIELDS,
+    factoryParts: [
+      { field: "invoice", responseField: "invoice" },
+      { field: "invoicePosSave", responseField: "invoicePos" },
+      { field: "discountSave" },
+    ],
     handler: (context) => ({ status: 201, objects: saveInvoice(context.tenant, context.input) }),
   },
   {

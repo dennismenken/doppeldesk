@@ -4,6 +4,7 @@ import { objectsSchema, schemaRef } from "../serialize/envelope.ts";
 import type { SpecIndex } from "../spec/specIndex.ts";
 import type { Schema } from "../spec/types.ts";
 import { genericHandler } from "./generic.ts";
+import { withKnownFactoryParts, withKnownFields } from "./knownFields.ts";
 import type { DomainModule, ResolvedRoute, RouteDefinition } from "./types.ts";
 
 interface OwnedRoute {
@@ -15,6 +16,8 @@ interface OwnedRoute {
  * Merges spec operations and domain routes by route key (method + path with erased
  * parameter names). A domain route replaces the generic route of the same key; domain
  * routes the spec does not know are added as "extra". Every key appears exactly once.
+ * Create and update handlers of spec operations only see the properties their model knows
+ * (see withKnownFields).
  */
 export function buildRoutes(spec: SpecIndex, modules: readonly DomainModule[], log: Logger): ResolvedRoute[] {
   const owned = new Map<string, OwnedRoute>();
@@ -41,7 +44,7 @@ export function buildRoutes(spec: SpecIndex, modules: readonly DomainModule[], l
         kind: "generic",
         module: undefined,
         operation,
-        handler: genericHandler(operation),
+        handler: withKnownFields(spec, operation, genericHandler(operation)),
         objectsSchema: objectsSchema(spec, operation.responseSchema),
         unvalidatedFields: [],
       });
@@ -54,7 +57,12 @@ export function buildRoutes(spec: SpecIndex, modules: readonly DomainModule[], l
       kind: "domain",
       module: domain.module,
       operation,
-      handler: domain.definition.handler,
+      handler: withKnownFactoryParts(
+        spec,
+        operation,
+        withKnownFields(spec, operation, domain.definition.handler),
+        domain.definition.factoryParts ?? [],
+      ),
       objectsSchema: explicitSchema(spec, domain, log) ?? objectsSchema(spec, operation.responseSchema),
       unvalidatedFields: domain.definition.unvalidatedFields ?? [],
     });
